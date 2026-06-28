@@ -7,13 +7,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--g1:#16a34a;--g2:#22c55e;--y:#facc15;--r:10px;--rl:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;background:#f0fdf4;color:#111}
-
-/* ===== LOGIN PAGE ===== */
-#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:#0d1f14;position:relative;overflow:hidden}
 
 /* Floating arabic words */
 .af{position:fixed;font-family:'Amiri',serif;direction:rtl;pointer-events:none;user-select:none;z-index:1}
@@ -931,19 +924,45 @@ function saveFeedback(){
 }
 function renderFeedback(){
   const fb=getFeedback(curUser.id);
-  if(!fb.length){$('feedbackList').innerHTML=`<div class="empty"><i class="ti ti-message-2"></i>Hali murojaat yuborilmagan</div>`;return}
-  const typeLabel={taklif:'💡 Taklif',muammo:'⚠️ Muammo',savol:'❓ Savol',boshqa:'📝 Boshqa'};
-  $('feedbackList').innerHTML=fb.map(f=>`
-    <div class="msg-card">
-      <div style="display:flex;justify-content:space-between">
-        <span class="msg-from">${typeLabel[f.type]||f.type}</span>
-        <span class="msg-time">${fmtDate(f.time)}</span>
-      </div>
-      <div class="msg-text">${esc(f.text)}</div>
-      ${f.reply?`<div class="msg-reply"><i class="ti ti-corner-down-right"></i> Admin javobi: ${esc(f.reply)}</div>`:'<div style="font-size:11px;color:#9ca3af;margin-top:4px">⏳ Javob kutilmoqda...</div>'}
-    </div>`).join('');
-  // Mark admin msgs as read
   const msgs=getMsgs(curUser.id);
+  const typeLabel={taklif:'💡 Taklif',muammo:'⚠️ Muammo',savol:'❓ Savol',boshqa:'📝 Boshqa'};
+  
+  let html='';
+  
+  // Show admin messages first
+  if(msgs.length){
+    html+='<div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:8px"><i class="ti ti-message-2"></i> Adminden xabarlar</div>';
+    html+=msgs.map(m=>`
+      <div class="msg-card" style="border-left:3px solid #3b82f6;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between">
+          <span class="msg-from" style="color:#1d4ed8">📩 Admin xabari</span>
+          <span class="msg-time">${fmtDate(m.time)} ${fmtTime(m.time)}</span>
+        </div>
+        <div class="msg-text">${esc(m.text)}</div>
+      </div>`).join('');
+  }
+  
+  // Show user's own feedbacks
+  if(fb.length){
+    html+='<div style="font-size:12px;font-weight:700;color:#374151;margin:12px 0 8px"><i class="ti ti-send"></i> Mening murojaatlarim</div>';
+    html+=fb.map(f=>`
+      <div class="msg-card">
+        <div style="display:flex;justify-content:space-between">
+          <span class="msg-from">${typeLabel[f.type]||f.type}</span>
+          <span class="msg-time">${fmtDate(f.time)}</span>
+        </div>
+        <div class="msg-text">${esc(f.text)}</div>
+        ${f.reply
+          ?`<div class="msg-reply"><i class="ti ti-corner-down-right"></i> Admin javobi: ${esc(f.reply)}</div>`
+          :'<div style="font-size:11px;color:#9ca3af;margin-top:4px">⏳ Javob kutilmoqda...</div>'
+        }
+      </div>`).join('');
+  }
+  
+  if(!html)html=`<div class="empty"><i class="ti ti-message-2"></i>Hali xabar yo'q. Yuqoridagi tugma orqali murojaat yuboring.</div>`;
+  $('feedbackList').innerHTML=html;
+  
+  // Mark admin msgs as read
   msgs.forEach(m=>m.readByUser=true);
   saveMsgs(curUser.id,msgs);
   $('msgDot').style.display='none';
@@ -981,40 +1000,45 @@ function exportLogs(){
 // ===== ADMIN USERS =====
 function renderAdminUsers(){
   const users=getUsers().filter(u=>u.role!=='admin');
-  const today=new Date().toDateString();
+  const now=new Date();
   let active=0,passive=0,fresh=0;
   users.forEach(u=>{
     const logs=getLogs(u.id);
-    const plans=getPlans(u.id);
-    const lastLog=logs[0];
-    const books=getBooks(u.id);
-    if(lastLog&&new Date(lastLog.time).toDateString()===today)active++;
-    else if(!lastLog)fresh++;
+    const last=logs[0];
+    if(!last){fresh++;return;}
+    const diffDays=(now-new Date(last.time))/(1000*60*60*24);
+    if(diffDays<=3)active++;
     else passive++;
   });
   $('adminStats').innerHTML=`
     <div class="stat"><div class="stat-label">Jami foydalanuvchi</div><div class="stat-val">${users.length}</div></div>
-    <div class="stat"><div class="stat-label">Bugun faol</div><div class="stat-val" style="color:#16a34a">${active}</div></div>
+    <div class="stat"><div class="stat-label">Faol (3 kun)</div><div class="stat-val" style="color:#16a34a">${active}</div></div>
     <div class="stat"><div class="stat-label">Passiv</div><div class="stat-val" style="color:#dc2626">${passive}</div></div>
-    <div class="stat"><div class="stat-label">Yangi (hali kirmagan)</div><div class="stat-val" style="color:#a16207">${fresh}</div></div>`;
+    <div class="stat"><div class="stat-label">Yangi</div><div class="stat-val" style="color:#a16207">${fresh}</div></div>`;
+
+  if(!users.length){
+    $("usersTbody").innerHTML='<tr><td colspan="8" style="text-align:center;padding:1.5rem;color:#9ca3af">Hali foydalanuvchi yo\'q</td></tr>';
+    return;
+  }
 
   $('usersTbody').innerHTML=users.map((u,i)=>{
     const logs=getLogs(u.id);
     const last=logs[0];
     const books=getBooks(u.id);
     const plans=getPlans(u.id);
-    const isPassive=last&&!isToday(last.time);
+    const diffDays=last?(now-new Date(last.time))/(1000*60*60*24):999;
+    const statusLabel=!last?'<span style="font-size:10px;color:#a16207">🆕 Yangi</span>':diffDays<=3?'<span style="font-size:10px;color:#16a34a">✅ Faol</span>':'<span style="font-size:10px;color:#dc2626">😴 Passiv</span>';
     return`<tr>
       <td>${i+1}</td>
-      <td><strong>${esc(u.name)}</strong>${isPassive?'<br><span style="font-size:10px;color:#dc2626">😴 Passiv</span>':last?'<br><span style="font-size:10px;color:#16a34a">✅ Faol</span>':'<br><span style="font-size:10px;color:#a16207">🆕 Yangi</span>'}</td>
-      <td>${plans.filter(p=>!p.done).length} reja</td>
-      <td>${last?`${fmtDate(last.time)}<br><small style="color:#9ca3af">${fmtTime(last.time)}</small>`:'—'}</td>
+      <td><strong>${esc(u.name)}</strong><br>${statusLabel}</td>
+      <td>${plans.filter(p=>!p.done).length} faol reja</td>
+      <td>${last?`${fmtDate(last.time)}<br><small style="color:#9ca3af">${fmtTime(last.time)}</small>`:'Hali kirmagan'}</td>
       <td style="font-family:monospace;font-size:11px">${last?.ip||'—'}</td>
       <td style="font-size:11px">${last?.location||'—'}</td>
-      <td>${books.length} ta</td>
-      <td>
-        <button class="btn-sm" onclick="openAdminMsgModalFor('${u.id}','${u.name}')"><i class="ti ti-send"></i></button>
-        <button class="btn-danger" style="margin-left:3px" onclick="delUser('${u.id}')"><i class="ti ti-trash"></i></button>
+      <td>${books.length} ta kitob</td>
+      <td style="white-space:nowrap">
+        <button class="btn-sm" onclick="openAdminMsgModalFor('${u.id}','${esc(u.name)}')" title="Xabar yuborish"><i class="ti ti-send"></i></button>
+        <button class="btn-danger" style="margin-left:3px" onclick="delUser('${u.id}')" title="O'chirish"><i class="ti ti-trash"></i></button>
       </td>
     </tr>`;
   }).join('');
@@ -1065,15 +1089,16 @@ function renderCharts(){
 }
 
 // ===== ADMIN MESSAGES =====
-function openAdminMsgModal(){
+function openAdminMsgModal(preUid){
   const users=getUsers().filter(u=>u.role!=='admin');
-  $('amTo').innerHTML=users.map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
+  if(!users.length){alert('Hali foydalanuvchi yo\'q');return;}
+  $('amTo').innerHTML=users.map(u=>`<option value="${u.id}">${esc(u.name)}</option>`).join('');
+  if(preUid)$('amTo').value=preUid;
   $('amText').value='';
   $('adminMsgModal').classList.add('open');
 }
 function openAdminMsgModalFor(uid,uname){
-  openAdminMsgModal();
-  $('amTo').value=uid;
+  openAdminMsgModal(uid);
 }
 function sendAdminMsg(){
   const toId=$('amTo').value;
@@ -1088,26 +1113,58 @@ function sendAdminMsg(){
 }
 function renderAdminMsgs(){
   const users=getUsers().filter(u=>u.role!=='admin');
-  let html='';
-  // Show all feedbacks from users
+  
+  // Collect ALL feedback from all users with timestamps
+  let allItems=[];
   users.forEach(u=>{
     const fb=getFeedback(u.id);
     fb.forEach(f=>{
-      html+=`<div class="msg-card${!f.read?' unread':''}">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <span class="msg-from">👤 ${esc(f.userName||u.name)}</span>
-          <span class="msg-time">${fmtDate(f.time)} ${fmtTime(f.time)}</span>
-        </div>
-        <div style="font-size:11px;color:#6b7280;margin-bottom:4px">📂 ${f.type}</div>
-        <div class="msg-text">${esc(f.text)}</div>
-        ${f.reply?`<div class="msg-reply">Javob: ${esc(f.reply)}</div>`:`<button class="btn-sm" style="margin-top:6px" onclick="replyFeedback('${u.id}','${f.id}')"><i class="ti ti-corner-down-right"></i> Javob berish</button>`}
-      </div>`;
+      allItems.push({...f,_userId:u.id,_userName:u.name,_type:'feedback'});
       f.read=true;
     });
     if(fb.length)saveFeedback2(u.id,fb);
+    
+    // Also show admin sent messages
+    const msgs=getMsgs(u.id).filter(m=>m.fromAdmin);
+    msgs.forEach(m=>{
+      allItems.push({...m,_userId:u.id,_userName:u.name,_type:'sent'});
+    });
   });
-  if(!html)html=`<div class="empty"><i class="ti ti-message-2"></i>Hali xabarlar yo'q</div>`;
-  $('adminMsgList').innerHTML=html;
+  
+  // Sort by time newest first
+  allItems.sort((a,b)=>new Date(b.time)-new Date(a.time));
+  
+  if(!allItems.length){
+    $('adminMsgList').innerHTML=`<div class="empty"><i class="ti ti-message-2"></i>Hali xabarlar yo'q. Foydalanuvchilar murojaat yuborganda bu yerda ko'rinadi.</div>`;
+    return;
+  }
+  
+  const typeLabel={taklif:'💡 Taklif',muammo:'⚠️ Muammo',savol:'❓ Savol',boshqa:'📝 Boshqa'};
+  
+  $('adminMsgList').innerHTML=allItems.map(item=>{
+    if(item._type==='sent'){
+      return`<div class="msg-card" style="border-left:3px solid #3b82f6">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="msg-from" style="color:#1d4ed8">📤 Sizdan → ${esc(item._userName)}</span>
+          <span class="msg-time">${fmtDate(item.time)} ${fmtTime(item.time)}</span>
+        </div>
+        <div class="msg-text">${esc(item.text)}</div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:4px">${item.readByUser?'\u2705 O\u02BFqildi':'\u23F3 O\u02BFqilmagan'}</div>
+      </div>`;
+    }
+    return`<div class="msg-card${!item.read?' unread':''}">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="msg-from">👤 ${esc(item._userName)}</span>
+        <span class="msg-time">${fmtDate(item.time)} ${fmtTime(item.time)}</span>
+      </div>
+      <div style="font-size:11px;color:#6b7280;margin-bottom:4px">${typeLabel[item.type]||item.type||''}</div>
+      <div class="msg-text">${esc(item.text)}</div>
+      ${item.reply
+        ?`<div class="msg-reply"><i class="ti ti-corner-down-right"></i> Javobingiz: ${esc(item.reply)}</div>`
+        :`<button class="btn-sm" style="margin-top:6px" onclick="replyFeedback('${item._userId}','${item.id}')"><i class="ti ti-corner-down-right"></i> Javob berish</button>`
+      }
+    </div>`;
+  }).join('');
 }
 function replyFeedback(userId,fbId){
   const reply=prompt('Javobingiz:');
