@@ -5,171 +5,202 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Mening Kutubxonam</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--green:#16a34a;--green2:#22c55e;--yellow:#facc15;--r:10px;--rl:16px}
+:root{--g1:#16a34a;--g2:#22c55e;--y:#facc15;--r:10px;--rl:16px}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;background:#f0fdf4;color:#111}
 
-/* ======= LOGIN ======= */
+/* ===== LOGIN PAGE ===== */
 #loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:#0d1f14;position:relative;overflow:hidden}
-.af{position:fixed;font-family:'Amiri',serif;direction:rtl;pointer-events:none;user-select:none;z-index:0}
-.af1{top:5%;left:2%;font-size:52px;animation:d1 9s ease-in-out infinite;background:linear-gradient(135deg,#facc15,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af2{top:8%;right:3%;font-size:46px;animation:d2 11s ease-in-out infinite;background:linear-gradient(135deg,#4ade80,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af3{bottom:14%;left:1%;font-size:58px;animation:d1 13s ease-in-out infinite;background:linear-gradient(135deg,#facc15,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af4{bottom:6%;right:2%;font-size:50px;animation:d2 10s ease-in-out infinite;background:linear-gradient(135deg,#4ade80,#fde047);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af5{top:42%;left:0%;font-size:44px;animation:d1 14s ease-in-out infinite;background:linear-gradient(135deg,#fde047,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af6{top:35%;right:1%;font-size:48px;animation:d2 8s ease-in-out infinite;background:linear-gradient(135deg,#4ade80,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af7{bottom:38%;left:3%;font-size:40px;animation:d1 12s ease-in-out infinite;background:linear-gradient(135deg,#facc15,#86efac);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af8{top:68%;right:4%;font-size:44px;animation:d2 10s ease-in-out infinite;background:linear-gradient(135deg,#86efac,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.af-m{top:28%;left:50%;font-size:64px;animation:cloud 16s ease-in-out infinite;background:linear-gradient(135deg,#ca8a04,#15803d,#ca8a04);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(202,138,4,0.5))}
-.af-n{top:58%;left:50%;font-size:52px;animation:cloud 18s ease-in-out infinite reverse;background:linear-gradient(135deg,#d1fae5,#15803d,#d1fae5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(21,128,61,0.6))}
+
+/* Floating arabic words */
+.af{position:fixed;font-family:'Amiri',serif;direction:rtl;pointer-events:none;user-select:none;z-index:1}
+.af1{top:5%;left:2%;font-size:52px;animation:d1 9s ease-in-out infinite}
+.af2{top:8%;right:3%;font-size:46px;animation:d2 11s ease-in-out infinite}
+.af3{bottom:14%;left:1%;font-size:58px;animation:d1 13s ease-in-out infinite}
+.af4{bottom:6%;right:2%;font-size:50px;animation:d2 10s ease-in-out infinite}
+.af5{top:42%;left:0%;font-size:44px;animation:d1 14s ease-in-out infinite}
+.af6{top:35%;right:1%;font-size:48px;animation:d2 8s ease-in-out infinite}
+.af7{bottom:38%;left:3%;font-size:40px;animation:d1 12s ease-in-out infinite}
+.af8{top:68%;right:4%;font-size:44px;animation:d2 10s ease-in-out infinite}
+.af-m{top:28%;left:50%;font-size:64px;animation:cloud 16s ease-in-out infinite}
+.af-n{top:58%;left:50%;font-size:52px;animation:cloud 18s ease-in-out infinite reverse}
+.af-grad{background:linear-gradient(135deg,#facc15,#4ade80,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.af-grad2{background:linear-gradient(135deg,#4ade80,#facc15,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.af-m{background:linear-gradient(135deg,#ca8a04,#15803d,#ca8a04);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(202,138,4,0.4))}
+.af-n{background:linear-gradient(135deg,#d1fae5,#15803d,#d1fae5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 @keyframes d1{0%,100%{transform:translateY(0) rotate(-12deg)}50%{transform:translateY(-18px) rotate(-10deg)}}
 @keyframes d2{0%,100%{transform:translateY(0) rotate(8deg)}50%{transform:translateY(-22px) rotate(10deg)}}
 @keyframes cloud{0%{margin-left:-60px;opacity:.6}50%{margin-left:60px;opacity:.9}100%{margin-left:-60px;opacity:.6}}
-.login-card{background:#fff;border-radius:24px;padding:2.2rem 1.8rem;width:100%;max-width:380px;animation:up .5s ease;box-shadow:0 32px 80px rgba(0,0,0,0.5);position:relative;z-index:10}
+
+.login-card{background:#fff;border-radius:24px;padding:2rem 1.8rem;width:100%;max-width:390px;animation:up .5s ease;box-shadow:0 32px 80px rgba(0,0,0,0.5);position:relative;z-index:10}
 @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.basmala{text-align:center;font-family:'Amiri',serif;font-size:20px;color:#16a34a;direction:rtl;margin-bottom:1.2rem}
-.brand{display:flex;align-items:center;gap:12px;margin-bottom:1.4rem;justify-content:center}
+.basmala{text-align:center;font-family:'Amiri',serif;font-size:20px;color:#16a34a;direction:rtl;margin-bottom:1.1rem}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:1.2rem;justify-content:center}
 .brand-icon{width:44px;height:44px;background:linear-gradient(135deg,#16a34a,#22c55e);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;box-shadow:0 4px 14px rgba(22,163,74,0.35)}
 .brand-name{font-size:17px;font-weight:700;color:#111}
 .brand-sub{font-size:12px;color:#6b7280;margin-top:2px}
-.fg{margin-bottom:.9rem}
-.fg label{display:block;font-size:13px;color:#374151;margin-bottom:4px;font-weight:500}
-.fg input,.fg select{width:100%;padding:10px 13px;border:1.5px solid #e5e7eb;border-radius:var(--r);background:#f9fafb;color:#111;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;font-family:inherit}
-.fg input:focus,.fg select:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,0.1);background:#fff}
-.btn-green{width:100%;padding:12px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border:2px solid #16a34a;border-radius:var(--r);font-size:16px;font-weight:700;cursor:pointer;margin-top:.4rem;letter-spacing:1.5px;font-family:'Amiri',serif;transition:background .3s,color .3s,box-shadow .3s;box-shadow:0 4px 16px rgba(22,163,74,0.4)}
-.btn-green:hover{background:#fff;color:#16a34a;box-shadow:0 6px 24px rgba(22,163,74,0.25)}
-.link-sm{font-size:13px;color:#16a34a;cursor:pointer;text-align:center;margin-top:.8rem;text-decoration:underline}
-.err{font-size:13px;color:#dc2626;margin-top:6px;min-height:14px}
-.shake{animation:shake .4s ease}
-@keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
-.tabs-login{display:flex;border-bottom:1.5px solid #e5e7eb;margin-bottom:1.2rem}
-.tab-l{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;transition:color .2s}
+
+.tabs-login{display:flex;border-bottom:1.5px solid #e5e7eb;margin-bottom:1.1rem;gap:2px}
+.tab-l{flex:1;padding:8px 4px;text-align:center;font-size:12px;font-weight:600;cursor:pointer;color:#6b7280;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;transition:color .2s;white-space:nowrap}
 .tab-l.active{color:#16a34a;border-bottom-color:#16a34a}
-.tab-admin-btn{font-size:16px;min-width:36px;color:#9ca3af!important}
+.tab-admin-btn{flex:0;min-width:34px;font-size:15px;color:#9ca3af!important}
 .tab-admin-btn.active{color:#dc2626!important;border-bottom-color:#dc2626!important}
 
-/* ======= APP ======= */
+.fg{margin-bottom:.85rem}
+.fg label{display:block;font-size:12px;color:#374151;margin-bottom:4px;font-weight:600}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:var(--r);background:#f9fafb;color:#111;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;font-family:inherit}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,0.1);background:#fff}
+.fg textarea{resize:vertical;min-height:70px}
+.btn-green{width:100%;padding:12px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border:2px solid #16a34a;border-radius:var(--r);font-size:16px;font-weight:700;cursor:pointer;margin-top:.3rem;letter-spacing:1.5px;font-family:'Amiri',serif;transition:background .3s,color .3s,box-shadow .3s;box-shadow:0 4px 16px rgba(22,163,74,0.4)}
+.btn-green:hover{background:#fff;color:#16a34a;box-shadow:0 6px 24px rgba(22,163,74,0.25)}
+.err{font-size:12px;color:#dc2626;margin-top:5px;min-height:14px}
+.shake{animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
+
+/* ===== APP ===== */
 #appPage{display:none;min-height:100vh;flex-direction:column}
-.topbar{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 1.2rem;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 1.2rem;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
 .topbar-left{display:flex;align-items:center;gap:10px}
 .tb-icon{width:32px;height:32px;background:linear-gradient(135deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
-.tb-name{font-size:14px;font-weight:600}
-.tb-user{font-size:12px;color:#6b7280}
+.tb-name{font-size:14px;font-weight:700}
+.tb-user{font-size:11px;color:#6b7280}
 .topbar-right{display:flex;gap:6px}
-.icon-btn{background:none;border:1px solid #e5e7eb;border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:16px;transition:background .15s}
-.icon-btn:hover{background:#f0fdf4;color:#16a34a}
-.nav-tabs{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 1rem;display:flex;gap:4px;overflow-x:auto}
-.ntab{padding:11px 14px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;transition:color .15s}
-.ntab.active{color:#16a34a;border-bottom-color:#16a34a}
-.main{flex:1;padding:1.2rem;max-width:960px;width:100%;margin:0 auto}
+.icon-btn{background:none;border:1px solid #e5e7eb;border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:16px;transition:all .15s;position:relative}
+.icon-btn:hover{background:#f0fdf4;color:#16a34a;border-color:#86efac}
+.badge-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#dc2626;border-radius:50%;border:1.5px solid #fff}
 
-/* cards & stats */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.2rem}
-@media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr}}
+.nav-tabs{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 1rem;display:flex;gap:4px;overflow-x:auto}
+.ntab{padding:10px 13px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;transition:color .15s;display:flex;align-items:center;gap:5px}
+.ntab.active{color:#16a34a;border-bottom-color:#16a34a}
+.ntab:hover{color:#111}
+
+.main{flex:1;padding:1.2rem;max-width:980px;width:100%;margin:0 auto}
+
+/* stats */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.1rem}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr}.nav-tabs{gap:0}}
 .stat{background:#fff;border:1px solid #e5e7eb;border-radius:var(--r);padding:12px 14px}
 .stat-label{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 .stat-val{font-size:20px;font-weight:700;color:#111}
 .stat-sub{font-size:11px;color:#9ca3af;margin-top:2px}
 
-/* books */
-.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem}
+/* section */
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;flex-wrap:wrap;gap:8px}
 .sec-title{font-size:14px;font-weight:700}
-.btn-add{display:flex;align-items:center;gap:5px;padding:7px 13px;background:#16a34a;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer}
+.btn-add{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;background:#16a34a;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s}
 .btn-add:hover{background:#15803d}
+.btn-sm{padding:5px 10px;font-size:12px;border-radius:7px;border:1px solid #e5e7eb;background:#f9fafb;cursor:pointer;color:#374151;transition:all .15s}
+.btn-sm:hover{background:#f0fdf4;border-color:#86efac;color:#15803d}
+.btn-danger{padding:5px 10px;font-size:12px;border-radius:7px;border:1px solid #fecaca;background:#fff;cursor:pointer;color:#dc2626}
+.btn-danger:hover{background:#fef2f2}
+
+/* books */
 .search-bar{position:relative;margin-bottom:.9rem}
 .search-bar input{width:100%;padding:9px 12px 9px 34px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111;font-size:13px;outline:none}
 .search-bar input:focus{border-color:#16a34a}
 .search-bar i{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:16px}
-.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.book-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:1rem 1.1rem}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px}
+.book-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:1rem 1.1rem;transition:border-color .15s}
 .book-card:hover{border-color:#86efac}
 .book-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
-.book-title{font-size:14px;font-weight:600;flex:1;margin-right:6px;line-height:1.4}
-.book-acts{display:flex;gap:3px}
-.bk-btn{background:none;border:none;cursor:pointer;color:#9ca3af;font-size:15px;padding:2px;transition:color .15s}
+.book-title{font-size:13px;font-weight:600;flex:1;margin-right:6px;line-height:1.4}
+.book-acts{display:flex;gap:3px;flex-shrink:0}
+.bk-btn{background:none;border:none;cursor:pointer;color:#9ca3af;font-size:14px;padding:2px;transition:color .15s}
 .bk-btn:hover{color:#16a34a}
 .bk-btn.del:hover{color:#dc2626}
-.book-meta{font-size:12px;color:#6b7280;margin-bottom:6px;display:flex;flex-wrap:wrap;gap:3px 10px}
+.book-meta{font-size:11px;color:#6b7280;margin-bottom:6px;display:flex;flex-wrap:wrap;gap:2px 8px}
 .book-meta span{display:flex;align-items:center;gap:2px}
-.book-desc{font-size:12px;color:#6b7280;border-top:1px solid #f3f4f6;padding-top:6px;margin-top:4px;line-height:1.5}
-.status-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;margin-top:5px}
+.status-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;margin-top:4px}
 .s-reading{background:#eff6ff;color:#1d4ed8}
 .s-done{background:#f0fdf4;color:#15803d}
 .s-plan{background:#fefce8;color:#a16207}
-.stars{color:#facc15;font-size:13px;margin-top:4px}
+.stars{color:#facc15;font-size:12px;margin-top:3px}
 
-/* reading plan */
+/* plans */
 .plan-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:10px}
-.plan-title{font-size:14px;font-weight:600;margin-bottom:6px}
-.progress-bar{height:8px;background:#f3f4f6;border-radius:99px;overflow:hidden;margin:8px 0}
+.progress-bar{height:7px;background:#f3f4f6;border-radius:99px;overflow:hidden;margin:7px 0}
 .progress-fill{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:99px;transition:width .4s}
-.plan-meta{font-size:12px;color:#6b7280;display:flex;flex-wrap:wrap;gap:4px 14px}
-.plan-meta span{display:flex;align-items:center;gap:3px}
+.plan-meta{font-size:11px;color:#6b7280;display:flex;flex-wrap:wrap;gap:3px 12px}
+.plan-meta span{display:flex;align-items:center;gap:2px}
 .plan-warn{font-size:12px;color:#dc2626;margin-top:5px;display:flex;align-items:center;gap:4px}
-.plan-done{font-size:12px;color:#16a34a;margin-top:5px;display:flex;align-items:center;gap:4px}
+.plan-ok{font-size:12px;color:#16a34a;margin-top:5px;display:flex;align-items:center;gap:4px}
+
+/* diary */
+.diary-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:10px}
 
 /* logs */
 .log-panel{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);overflow:hidden}
-.log-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #e5e7eb}
-.log-row{display:grid;grid-template-columns:28px 1fr 1fr 1fr auto;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid #f3f4f6;font-size:12px}
+.log-head{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid #e5e7eb}
+.log-row{display:grid;grid-template-columns:24px 1fr 1fr 1fr 1fr auto;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid #f3f4f6;font-size:12px}
+@media(max-width:600px){.log-row{grid-template-columns:24px 1fr 1fr auto}}
 .log-row:last-child{border-bottom:none}
 .log-row:hover{background:#f9fafb}
-.log-num{font-size:11px;color:#9ca3af;text-align:center}
-.log-time{font-weight:600;font-size:13px}
-.log-date{font-size:11px;color:#6b7280}
-.badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;white-space:nowrap}
 .badge-now{background:#f0fdf4;color:#15803d}
 .badge-old{background:#f3f4f6;color:#6b7280}
-.cur-ip-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;flex-wrap:wrap;gap:8px}
-.ip-info{font-size:12px;color:#6b7280;display:flex;align-items:center;gap:6px}
 
 /* admin */
-.admin-panel{background:#fff;border:1px solid #fecaca;border-radius:var(--rl);padding:1.2rem;margin-bottom:1rem}
-.admin-title{font-size:14px;font-weight:700;color:#dc2626;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
-.users-table{width:100%;border-collapse:collapse;font-size:13px}
-.users-table th{text-align:left;padding:8px 10px;background:#fef2f2;color:#6b7280;font-weight:600;border-bottom:1px solid #fecaca;font-size:11px;text-transform:uppercase}
+.admin-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:1.2rem;margin-bottom:1rem}
+.admin-title{font-size:14px;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+.users-table{width:100%;border-collapse:collapse;font-size:12px}
+.users-table th{text-align:left;padding:7px 10px;background:#f9fafb;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;font-size:11px;text-transform:uppercase}
 .users-table td{padding:8px 10px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
 .users-table tr:last-child td{border-bottom:none}
-.users-table tr:hover td{background:#fef9f9}
+.users-table tr:hover td{background:#fafff9}
+.chart-wrap{position:relative;height:220px;margin-top:.8rem}
+
+/* messages / feedback */
+.msg-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:1rem;margin-bottom:10px}
+.msg-card.unread{border-left:3px solid #16a34a}
+.msg-from{font-size:12px;font-weight:600;color:#374151}
+.msg-time{font-size:11px;color:#9ca3af}
+.msg-text{font-size:13px;color:#4b5563;margin-top:5px;line-height:1.5}
+.msg-reply{font-size:12px;background:#f0fdf4;border-radius:8px;padding:8px;margin-top:6px;color:#15803d;border-left:2px solid #86efac}
+
+/* notify banner */
+.notify-banner{background:#fef9c3;border:1px solid #fde047;border-radius:10px;padding:9px 13px;font-size:13px;color:#713f12;display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+
+/* goals */
+.goal-card{background:#fff;border:1px solid #e5e7eb;border-radius:var(--rl);padding:.9rem 1rem;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.goal-check{width:18px;height:18px;accent-color:#16a34a;cursor:pointer;flex-shrink:0}
+.goal-text{font-size:13px;flex:1}
+.goal-text.done-text{text-decoration:line-through;color:#9ca3af}
 
 /* modal */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:var(--rl);padding:1.6rem 1.4rem;width:100%;max-width:460px;animation:up .25s ease;max-height:90vh;overflow-y:auto}
-.modal h3{font-size:15px;font-weight:700;margin-bottom:1.1rem;display:flex;align-items:center;gap:7px}
+.modal{background:#fff;border-radius:var(--rl);padding:1.5rem 1.4rem;width:100%;max-width:460px;animation:up .25s ease;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:7px}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:1rem}
-.modal-btns button{padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #e5e7eb;background:#f9fafb;color:#111}
+.modal-btns button{padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #e5e7eb;background:#f9fafb;color:#111;transition:opacity .15s}
 .modal-btns .save{background:#16a34a;color:#fff;border-color:#16a34a}
 .modal-btns button:hover{opacity:.85}
-.modal textarea{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#111;font-size:13px;outline:none;resize:vertical;min-height:70px;font-family:inherit}
-.modal textarea:focus{border-color:#16a34a}
 .spinner{display:inline-block;width:13px;height:13px;border:2px solid #e5e7eb;border-top-color:#16a34a;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
-.divider{text-align:center;font-size:12px;color:#9ca3af;margin:.6rem 0;position:relative}
-.divider::before,.divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:#e5e7eb}
-.divider::before{left:0}.divider::after{right:0}
 .empty{padding:2.5rem;text-align:center;color:#9ca3af;font-size:13px}
 .empty i{font-size:28px;display:block;margin-bottom:8px}
-.notify-banner{background:#fef9c3;border:1px solid #fde047;border-radius:10px;padding:10px 14px;font-size:13px;color:#713f12;display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.cur-ip-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;flex-wrap:wrap;gap:8px}
+.ip-info{font-size:12px;color:#6b7280;display:flex;align-items:center;gap:6px}
 </style>
 </head>
 <body>
 
-<!-- FLOATING ARABIC -->
-<div class="af af1">سُبْحَانَ اللَّه</div>
-<div class="af af2">اللَّهُ أَكْبَر</div>
-<div class="af af3">الْحَمْدُ لِلَّه</div>
-<div class="af af4">اقْرَأْ</div>
-<div class="af af5">سُبْحَانَ اللَّه</div>
-<div class="af af6">اللَّهُ أَكْبَر</div>
-<div class="af af7">الْحَمْدُ لِلَّه</div>
-<div class="af af8">اقْرَأْ</div>
+<!-- Floating Arabic words (always visible on login) -->
+<div class="af af1 af-grad">سُبْحَانَ اللَّه</div>
+<div class="af af2 af-grad2">اللَّهُ أَكْبَر</div>
+<div class="af af3 af-grad">الْحَمْدُ لِلَّه</div>
+<div class="af af4 af-grad2">اقْرَأْ</div>
+<div class="af af5 af-grad">سُبْحَانَ اللَّه</div>
+<div class="af af6 af-grad2">اللَّهُ أَكْبَر</div>
+<div class="af af7 af-grad">الْحَمْدُ لِلَّه</div>
+<div class="af af8 af-grad2">اقْرَأْ</div>
 <div class="af af-m">مَدِينَتِي</div>
 <div class="af af-n">نُورُ وَجْهِي</div>
 
-<!-- ===== LOGIN PAGE ===== -->
+<!-- ===== LOGIN ===== -->
 <div id="loginPage">
   <div class="login-card" id="loginCard">
     <div class="basmala">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
@@ -178,90 +209,90 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;m
       <div><div class="brand-name">Mening Kutubxonam</div><div class="brand-sub">Shaxsiy kitob to'plami</div></div>
     </div>
     <div class="tabs-login">
-      <div class="tab-l active" onclick="showLoginTab('login',this)">Kirish</div>
-      <div class="tab-l" onclick="showLoginTab('register',this)">Ro'yxatdan o'tish</div>
-      <div class="tab-l" onclick="showLoginTab('forgot',this)">Parolni unutdim</div>
-      <div class="tab-l tab-admin-btn" onclick="showLoginTab('admin',this)" title="Admin">🔒</div>
+      <div class="tab-l active" onclick="showTab('login',this)">Kirish</div>
+      <div class="tab-l" onclick="showTab('register',this)">Ro'yxatdan o'tish</div>
+      <div class="tab-l" onclick="showTab('forgot',this)">Parolni unutdim</div>
+      <div class="tab-l tab-admin-btn" onclick="showTab('admin',this)" title="Admin">🔒</div>
     </div>
 
-    <!-- LOGIN (foydalanuvchi) -->
-    <div id="tabLogin">
-      <div class="fg"><label>Ism Familiya</label><input type="text" id="loginName" placeholder="Ismingizni kiriting"/></div>
-      <div class="fg"><label>Parol</label><input type="password" id="loginPass" placeholder="Bismillah... parolni kiriting" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <!-- KIRISH -->
+    <div id="pLogin">
+      <div class="fg"><label>Ism Familiya</label><input type="text" id="lName" placeholder="Ismingiz"/></div>
+      <div class="fg"><label>Parol</label><input type="password" id="lPass" placeholder="Bismillah... parolni kiriting" onkeydown="if(event.key==='Enter')doLogin()"/></div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:.8rem">
         <input type="checkbox" id="remMe" checked style="accent-color:#16a34a;width:15px;height:15px"/>
-        <label for="remMe" style="font-size:13px;color:#6b7280;cursor:pointer">Meni eslab qol</label>
+        <label for="remMe" style="font-size:12px;color:#6b7280;cursor:pointer">Meni eslab qol</label>
       </div>
       <button class="btn-green" onclick="doLogin()">✦ Kirish ✦</button>
-      <div class="err" id="loginErr"></div>
+      <div class="err" id="lErr"></div>
     </div>
 
-    <!-- ADMIN LOGIN -->
-    <div id="tabAdmin" style="display:none">
-      <div style="text-align:center;margin-bottom:1rem">
-        <div style="font-size:28px">🛡️</div>
-        <div style="font-size:13px;color:#6b7280;margin-top:4px">Admin kirishi — faqat tizim boshqaruvchisi uchun</div>
-      </div>
-      <div class="fg"><label>Admin paroli</label><input type="password" id="adminPass" placeholder="Maxfiy parol" onkeydown="if(event.key==='Enter')doAdminLogin()"/></div>
-      <button class="btn-green" onclick="doAdminLogin()">🔒 Admin kirish</button>
-      <div class="err" id="adminErr"></div>
-    </div>
-
-    <!-- REGISTER -->
-    <div id="tabRegister" style="display:none">
-      <div class="fg"><label>Ism Familiya *</label><input type="text" id="regName" placeholder="To'liq ismingiz"/></div>
-      <div class="fg"><label>Parol *</label><input type="password" id="regPass" placeholder="Kamida 4 ta belgi"/></div>
-      <div class="fg"><label>Parolni tasdiqlang *</label><input type="password" id="regPass2" placeholder="Qayta kiriting"/></div>
+    <!-- RO'YXATDAN O'TISH -->
+    <div id="pRegister" style="display:none">
+      <div class="fg"><label>Ism Familiya *</label><input type="text" id="rName" placeholder="To'liq ismingiz (aniq yozing)"/></div>
+      <div class="fg"><label>Parol *</label><input type="password" id="rPass" placeholder="Kamida 4 ta belgi"/></div>
+      <div class="fg"><label>Parolni tasdiqlang *</label><input type="password" id="rPass2" placeholder="Qayta kiriting"/></div>
       <div class="fg"><label>Maxfiy savol *</label>
-        <select id="regQuestion">
+        <select id="rQ">
           <option value="Onangizning ismi?">Onangizning ismi?</option>
           <option value="Tug'ilgan shaharingiz?">Tug'ilgan shaharingiz?</option>
           <option value="Sevimli kitobingiz?">Sevimli kitobingiz?</option>
-          <option value="Boshlang'ich maktabingiz?">Boshlang'ich maktabingiz?</option>
+          <option value="Boshlang'ich maktabingiz nomi?">Boshlang'ich maktabingiz nomi?</option>
           <option value="Sevimli o'qituvchingiz ismi?">Sevimli o'qituvchingiz ismi?</option>
         </select>
       </div>
-      <div class="fg"><label>Savol javobi *</label><input type="text" id="regAnswer" placeholder="Javobingiz"/></div>
+      <div class="fg"><label>Savol javobi * (aniq va to'g'ri yozing)</label><input type="text" id="rA" placeholder="Javob (katta-kichik harflar muhim)"/></div>
       <button class="btn-green" onclick="doRegister()">✦ Ro'yxatdan o'tish ✦</button>
-      <div class="err" id="regErr"></div>
+      <div class="err" id="rErr"></div>
     </div>
 
-    <!-- FORGOT -->
-    <div id="tabForgot" style="display:none">
-      <div class="fg"><label>Ism Familiya</label><input type="text" id="fgName" placeholder="Ro'yxatdagi ismingiz"/></div>
-      <div id="fgQuestionBox" style="display:none">
-        <div class="fg"><label id="fgQuestionLabel">Maxfiy savol</label><input type="text" id="fgAnswer" placeholder="Javobingiz"/></div>
-        <div class="fg"><label>Yangi parol</label><input type="password" id="fgNewPass" placeholder="Yangi parol"/></div>
+    <!-- PAROLNI UNUTDIM -->
+    <div id="pForgot" style="display:none">
+      <div id="fStep1">
+        <p style="font-size:12px;color:#6b7280;margin-bottom:.8rem">Ismingizni ro'yxatdagidek aynan bir xil (katta-kichik harflarga e'tibor bering) kiriting.</p>
+        <div class="fg"><label>Ism Familiya (aynan bir xil)</label><input type="text" id="fName" placeholder="Masalan: Abdulloh Karimov"/></div>
+        <button class="btn-green" onclick="forgotStep1()">Davom etish</button>
+        <div class="err" id="fErr"></div>
       </div>
-      <button class="btn-green" onclick="doForgot()">Davom etish</button>
-      <div class="err" id="fgErr"></div>
+      <div id="fStep2" style="display:none">
+        <div class="fg"><label id="fQLabel">Maxfiy savol</label></div>
+        <div class="fg"><label>Javob (aynan bir xil, katta-kichik harf muhim)</label><input type="text" id="fAns" placeholder="Ro'yxatda yozganingiz bilan bir xil"/></div>
+        <div class="fg"><label>Yangi parol</label><input type="password" id="fNew" placeholder="Yangi parol"/></div>
+        <button class="btn-green" onclick="forgotStep2()">Parolni yangilash</button>
+        <div class="err" id="fErr2"></div>
+      </div>
+    </div>
+
+    <!-- ADMIN KIRISH -->
+    <div id="pAdmin" style="display:none">
+      <div style="text-align:center;margin-bottom:1rem">
+        <div style="font-size:32px">🛡️</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">Admin — faqat tizim boshqaruvchisi uchun</div>
+      </div>
+      <div class="fg"><label>Admin paroli</label><input type="password" id="aPass" placeholder="Maxfiy parol" onkeydown="if(event.key==='Enter')doAdminLogin()"/></div>
+      <button class="btn-green" onclick="doAdminLogin()" style="background:linear-gradient(135deg,#dc2626,#ef4444);border-color:#dc2626">🔒 Admin kirish</button>
+      <div class="err" id="aErr"></div>
     </div>
   </div>
 </div>
 
-<!-- ===== APP PAGE ===== -->
+<!-- ===== APP ===== -->
 <div id="appPage">
   <div class="topbar">
     <div class="topbar-left">
       <div class="tb-icon"><i class="ti ti-books"></i></div>
-      <div><div class="tb-name">Mening Kutubxonam</div><div class="tb-user" id="topbarUser"></div></div>
+      <div><div class="tb-name">Mening Kutubxonam</div><div class="tb-user" id="tbUser"></div></div>
     </div>
     <div class="topbar-right">
+      <button class="icon-btn" id="msgBtnTop" onclick="switchTab('feedback',document.querySelector('.ntab[data-tab=feedback]'))" title="Xabarlar" style="display:none"><i class="ti ti-message-2"></i><span class="badge-dot" id="msgDot" style="display:none"></span></button>
       <button class="icon-btn" onclick="openSettings()" title="Sozlamalar"><i class="ti ti-settings"></i></button>
       <button class="icon-btn" onclick="doLogout()" title="Chiqish"><i class="ti ti-logout"></i></button>
     </div>
   </div>
-  <div class="nav-tabs" id="navTabs">
-    <div class="ntab active" onclick="switchTab('books',this)"><i class="ti ti-books"></i> Kitoblar</div>
-    <div class="ntab" onclick="switchTab('plans',this)"><i class="ti ti-calendar"></i> O'qish rejasi</div>
-    <div class="ntab" onclick="switchTab('diary',this)"><i class="ti ti-pencil"></i> Kundalik</div>
-    <div class="ntab" onclick="switchTab('logs',this)"><i class="ti ti-history"></i> Kirish tarixi</div>
-    <div class="ntab" id="adminTab" style="display:none" onclick="switchTab('admin',this)"><i class="ti ti-shield"></i> Admin</div>
-  </div>
+  <div class="nav-tabs" id="navTabs"></div>
   <div class="main">
-
     <!-- BOOKS -->
-    <div id="tabBooks">
+    <div id="tabBooks" style="display:none">
       <div id="notifyBanner" style="display:none" class="notify-banner"><i class="ti ti-bell"></i><span id="notifyText"></span></div>
       <div class="stats-row" id="bookStats"></div>
       <div class="sec-head">
@@ -274,70 +305,94 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;m
 
     <!-- PLANS -->
     <div id="tabPlans" style="display:none">
-      <div class="sec-head">
-        <div class="sec-title">O'qish rejalari</div>
-        <button class="btn-add" onclick="openPlanModal()"><i class="ti ti-plus"></i> Yangi reja</button>
-      </div>
+      <div class="sec-head"><div class="sec-title">O'qish rejalari</div><button class="btn-add" onclick="openPlanModal()"><i class="ti ti-plus"></i> Yangi reja</button></div>
       <div id="plansList"></div>
     </div>
 
     <!-- DIARY -->
     <div id="tabDiary" style="display:none">
-      <div class="sec-head">
-        <div class="sec-title">Ilm kundaligi</div>
-        <button class="btn-add" onclick="openDiaryModal()"><i class="ti ti-plus"></i> Yozuv qo'shish</button>
-      </div>
+      <div class="sec-head"><div class="sec-title">Ilm kundaligi</div><button class="btn-add" onclick="openDiaryModal()"><i class="ti ti-plus"></i> Yozuv</button></div>
       <div id="diaryList"></div>
+    </div>
+
+    <!-- FEEDBACK (user) -->
+    <div id="tabFeedback" style="display:none">
+      <div class="sec-head"><div class="sec-title">Taklif va murojaatlar</div><button class="btn-add" onclick="openFeedbackModal()"><i class="ti ti-send"></i> Xabar yuborish</button></div>
+      <div id="feedbackList"></div>
     </div>
 
     <!-- LOGS -->
     <div id="tabLogs" style="display:none">
       <div class="stats-row" id="logStats"></div>
       <div class="log-panel">
-        <div class="log-head">
-          <span style="font-size:14px;font-weight:600"><i class="ti ti-history"></i> Kirish tarixi</span>
-          <span id="logCount" style="font-size:12px;color:#6b7280"></span>
-        </div>
+        <div class="log-head"><span style="font-size:13px;font-weight:600"><i class="ti ti-history"></i> Kirish tarixi</span><span id="logCount" style="font-size:12px;color:#6b7280"></span></div>
         <div id="logList"></div>
       </div>
       <div class="cur-ip-bar">
         <div class="ip-info"><i class="ti ti-wifi"></i> Hozirgi IP: <strong id="curIPEl">...</strong></div>
         <div style="display:flex;gap:6px">
-          <button class="btn-add" onclick="exportLogs()"><i class="ti ti-download"></i> CSV</button>
-          <button style="padding:7px 12px;border:1px solid #fecaca;border-radius:8px;background:#fff;color:#dc2626;font-size:12px;cursor:pointer" onclick="clearMyLogs()"><i class="ti ti-trash"></i> Tozalash</button>
+          <button class="btn-sm" onclick="exportLogs()"><i class="ti ti-download"></i> CSV</button>
+          <button class="btn-danger" onclick="clearMyLogs()"><i class="ti ti-trash"></i> Tozalash</button>
         </div>
       </div>
     </div>
 
-    <!-- ADMIN -->
-    <div id="tabAdmin" style="display:none">
-      <div class="admin-panel">
-        <div class="admin-title"><i class="ti ti-shield-lock"></i> Admin paneli — Foydalanuvchilar</div>
-        <button class="btn-add" style="margin-bottom:1rem" onclick="openUserModal()"><i class="ti ti-user-plus"></i> Yangi foydalanuvchi</button>
-        <table class="users-table" id="usersTable">
-          <thead><tr><th>#</th><th>Ism Familiya</th><th>So'nggi kirish</th><th>IP</th><th>Joylashuv</th><th>Amal</th></tr></thead>
-          <tbody id="usersTbody"></tbody>
-        </table>
-      </div>
-      <div class="admin-panel" style="border-color:#bbf7d0">
-        <div class="admin-title" style="color:#15803d"><i class="ti ti-chart-bar"></i> Umumiy statistika</div>
+    <!-- ADMIN: USERS -->
+    <div id="tabAdminUsers" style="display:none">
+      <div class="admin-card">
+        <div class="admin-title"><i class="ti ti-users"></i> Foydalanuvchilar</div>
         <div class="stats-row" id="adminStats"></div>
+        <div style="margin-top:1rem;overflow-x:auto">
+          <table class="users-table">
+            <thead><tr><th>#</th><th>Ism Familiya</th><th>Holat</th><th>So'nggi kirish</th><th>IP</th><th>Joylashuv</th><th>Kitoblar</th><th>Amal</th></tr></thead>
+            <tbody id="usersTbody"></tbody>
+          </table>
+        </div>
       </div>
+    </div>
+
+    <!-- ADMIN: DIAGRAMS -->
+    <div id="tabAdminChart" style="display:none">
+      <div class="admin-card">
+        <div class="admin-title"><i class="ti ti-chart-bar"></i> O'qish diagrammasi</div>
+        <div class="chart-wrap"><canvas id="chartReading"></canvas></div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-title"><i class="ti ti-chart-pie"></i> Foydalanuvchi holatlari</div>
+        <div class="chart-wrap"><canvas id="chartStatus"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ADMIN: MESSAGES -->
+    <div id="tabAdminMsg" style="display:none">
+      <div class="sec-head">
+        <div class="sec-title"><i class="ti ti-message-2"></i> Foydalanuvchilar xabarlari</div>
+        <button class="btn-add" onclick="openAdminMsgModal()"><i class="ti ti-send"></i> Xabar yuborish</button>
+      </div>
+      <div id="adminMsgList"></div>
+    </div>
+
+    <!-- ADMIN: GOALS -->
+    <div id="tabAdminGoals" style="display:none">
+      <div class="sec-head">
+        <div class="sec-title"><i class="ti ti-target"></i> Mening maqsadlarim</div>
+        <button class="btn-add" onclick="openGoalModal()"><i class="ti ti-plus"></i> Maqsad</button>
+      </div>
+      <div id="goalsList"></div>
     </div>
 
   </div>
 </div>
 
 <!-- MODALS -->
-<!-- Book Modal -->
 <div class="modal-bg" id="bookModal">
   <div class="modal">
     <h3 id="bookModalTitle"><i class="ti ti-book"></i> Kitob qo'shish</h3>
-    <div class="fg"><label>Kitob nomi *</label><input type="text" id="bName" placeholder="Kitob nomi"/></div>
-    <div class="fg"><label>Muallif *</label><input type="text" id="bAuthor" placeholder="Muallif"/></div>
-    <div class="fg"><label>Sahifalar soni</label><input type="number" id="bPages" placeholder="Masalan: 250" min="1"/></div>
-    <div class="fg"><label>Nashr yili</label><input type="number" id="bYear" placeholder="2020" min="1000" max="2099"/></div>
-    <div class="fg"><label>Nashriyot</label><input type="text" id="bPublisher" placeholder="Nashriyot nomi"/></div>
+    <div class="fg"><label>Kitob nomi *</label><input type="text" id="bName"/></div>
+    <div class="fg"><label>Muallif *</label><input type="text" id="bAuthor"/></div>
+    <div class="fg"><label>Sahifalar</label><input type="number" id="bPages" min="1"/></div>
+    <div class="fg"><label>Nashr yili</label><input type="number" id="bYear" min="1000" max="2099"/></div>
+    <div class="fg"><label>Nashriyot</label><input type="text" id="bPublisher"/></div>
     <div class="fg"><label>Holati</label>
       <select id="bStatus">
         <option value="plan">📌 O'qimoqchiman</option>
@@ -345,161 +400,142 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;m
         <option value="done">✅ O'qib bo'ldim</option>
       </select>
     </div>
-    <div class="fg"><label>Baho (1-5 yulduz)</label>
+    <div class="fg"><label>Baho</label>
       <select id="bRating"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
     </div>
-    <div class="fg"><label>Qisqa ma'lumot</label><textarea id="bDesc" placeholder="Kitob haqida..."></textarea></div>
+    <div class="fg"><label>Izoh</label><textarea id="bDesc"></textarea></div>
     <div class="err" id="bookErr"></div>
-    <div class="modal-btns">
-      <button onclick="closeBookModal()">Bekor</button>
-      <button class="save" onclick="saveBook()">Saqlash</button>
-    </div>
+    <div class="modal-btns"><button onclick="closeM('bookModal')">Bekor</button><button class="save" onclick="saveBook()">Saqlash</button></div>
   </div>
 </div>
 
-<!-- Plan Modal -->
 <div class="modal-bg" id="planModal">
   <div class="modal">
     <h3><i class="ti ti-calendar"></i> O'qish rejasi</h3>
-    <div class="fg"><label>Kitob nomi *</label><input type="text" id="pBook" placeholder="Qaysi kitob?"/></div>
-    <div class="fg"><label>Jami sahifalar *</label><input type="number" id="pTotal" placeholder="Masalan: 100" min="1" oninput="calcPlan()"/></div>
-    <div class="fg"><label>Kuniga necha sahifa *</label><input type="number" id="pDaily" placeholder="Masalan: 15" min="1" oninput="calcPlan()"/></div>
-    <div id="planCalc" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:.8rem;display:none">
-      <div id="planCalcText"></div>
-    </div>
+    <div class="fg"><label>Kitob nomi *</label><input type="text" id="pBook"/></div>
+    <div class="fg"><label>Jami sahifalar *</label><input type="number" id="pTotal" min="1" oninput="calcPlan()"/></div>
+    <div class="fg"><label>Kuniga necha sahifa *</label><input type="number" id="pDaily" min="1" oninput="calcPlan()"/></div>
+    <div id="planCalc" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:9px 12px;font-size:13px;margin-bottom:.8rem;display:none"></div>
     <div class="fg"><label>Boshlash sanasi</label><input type="date" id="pStart"/></div>
     <div class="err" id="planErr"></div>
-    <div class="modal-btns">
-      <button onclick="closePlanModal()">Bekor</button>
-      <button class="save" onclick="savePlan()">Saqlash</button>
-    </div>
+    <div class="modal-btns"><button onclick="closeM('planModal')">Bekor</button><button class="save" onclick="savePlan()">Saqlash</button></div>
   </div>
 </div>
 
-<!-- Diary Modal -->
 <div class="modal-bg" id="diaryModal">
   <div class="modal">
     <h3><i class="ti ti-pencil"></i> Kundalik yozuv</h3>
     <div class="fg"><label>Sana</label><input type="date" id="dDate"/></div>
-    <div class="fg"><label>Bugun nima o'rgandim</label><textarea id="dText" placeholder="Bugungi ilmim, fikrlarim, iqtiboslarim..."></textarea></div>
+    <div class="fg"><label>Bugun nima o'rgandim</label><textarea id="dText" placeholder="Fikrlar, iqtiboslar..."></textarea></div>
     <div class="fg"><label>Kayfiyat</label>
       <select id="dMood"><option value="😊">😊 Yaxshi</option><option value="📚">📚 Ilmli</option><option value="💡">💡 Kashfiyot</option><option value="🤔">🤔 O'ylantirdi</option><option value="⭐">⭐ Ajoyib kun</option></select>
     </div>
-    <div class="modal-btns">
-      <button onclick="closeDiaryModal()">Bekor</button>
-      <button class="save" onclick="saveDiary()">Saqlash</button>
-    </div>
+    <div class="modal-btns"><button onclick="closeM('diaryModal')">Bekor</button><button class="save" onclick="saveDiary()">Saqlash</button></div>
   </div>
 </div>
 
-<!-- User Modal (Admin) -->
-<div class="modal-bg" id="userModal">
+<div class="modal-bg" id="feedbackModal">
   <div class="modal">
-    <h3 id="userModalTitle"><i class="ti ti-user-plus"></i> Yangi foydalanuvchi</h3>
-    <div class="fg"><label>Ism Familiya *</label><input type="text" id="uName" placeholder="Ism Familiya"/></div>
-    <div class="fg"><label>Parol *</label><input type="password" id="uPass" placeholder="Parol"/></div>
-    <div class="fg"><label>Maxfiy savol *</label>
-      <select id="uQuestion">
-        <option value="Onangizning ismi?">Onangizning ismi?</option>
-        <option value="Tug'ilgan shaharingiz?">Tug'ilgan shaharingiz?</option>
-        <option value="Sevimli kitobingiz?">Sevimli kitobingiz?</option>
-        <option value="Boshlang'ich maktabingiz?">Boshlang'ich maktabingiz?</option>
-        <option value="Sevimli o'qituvchingiz ismi?">Sevimli o'qituvchingiz ismi?</option>
-      </select>
+    <h3><i class="ti ti-send"></i> Taklif yoki murojaat</h3>
+    <div class="fg"><label>Mavzu</label>
+      <select id="fbType"><option value="taklif">💡 Taklif</option><option value="muammo">⚠️ Muammo</option><option value="savol">❓ Savol</option><option value="boshqa">📝 Boshqa</option></select>
     </div>
-    <div class="fg"><label>Savol javobi *</label><input type="text" id="uAnswer" placeholder="Javob"/></div>
-    <div class="fg"><label>Rol</label>
-      <select id="uRole"><option value="user">Foydalanuvchi</option><option value="admin">Admin</option></select>
-    </div>
-    <div class="err" id="userErr"></div>
-    <div class="modal-btns">
-      <button onclick="closeUserModal()">Bekor</button>
-      <button class="save" onclick="saveUser()">Saqlash</button>
-    </div>
+    <div class="fg"><label>Xabar *</label><textarea id="fbText" placeholder="Xabaringizni yozing..."></textarea></div>
+    <div class="modal-btns"><button onclick="closeM('feedbackModal')">Bekor</button><button class="save" onclick="saveFeedback()">Yuborish</button></div>
   </div>
 </div>
 
-<!-- Settings Modal -->
+<div class="modal-bg" id="adminMsgModal">
+  <div class="modal">
+    <h3><i class="ti ti-send"></i> Foydalanuvchiga xabar</h3>
+    <div class="fg"><label>Kim uchun</label>
+      <select id="amTo"></select>
+    </div>
+    <div class="fg"><label>Xabar *</label><textarea id="amText" placeholder="Xabar matni..."></textarea></div>
+    <div class="modal-btns"><button onclick="closeM('adminMsgModal')">Bekor</button><button class="save" onclick="sendAdminMsg()">Yuborish</button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="goalModal">
+  <div class="modal">
+    <h3><i class="ti ti-target"></i> Maqsad qo'shish</h3>
+    <div class="fg"><label>Maqsad *</label><input type="text" id="goText" placeholder="Maqsadingizni yozing"/></div>
+    <div class="fg"><label>Muddat (ixtiyoriy)</label><input type="date" id="goDate"/></div>
+    <div class="modal-btns"><button onclick="closeM('goalModal')">Bekor</button><button class="save" onclick="saveGoal()">Saqlash</button></div>
+  </div>
+</div>
+
 <div class="modal-bg" id="settingsModal">
   <div class="modal">
     <h3><i class="ti ti-settings"></i> Sozlamalar</h3>
-    <div class="fg"><label>Yangi parol (bo'sh = o'zgarmaydi)</label><input type="password" id="sPass1" placeholder="Yangi parol"/></div>
-    <div class="fg"><label>Parolni tasdiqlang</label><input type="password" id="sPass2" placeholder="Qayta kiriting"/></div>
-    <div class="err" id="settingsErr"></div>
-    <div class="modal-btns">
-      <button onclick="closeModal('settingsModal')">Bekor</button>
-      <button class="save" onclick="saveSettings()">Saqlash</button>
-    </div>
+    <div class="fg"><label>Yangi parol (bo'sh = o'zgarmaydi)</label><input type="password" id="sP1" placeholder="Yangi parol"/></div>
+    <div class="fg"><label>Tasdiqlang</label><input type="password" id="sP2" placeholder="Qayta kiriting"/></div>
+    <div class="err" id="sErr"></div>
+    <div class="modal-btns"><button onclick="closeM('settingsModal')">Bekor</button><button class="save" onclick="saveSettings()">Saqlash</button></div>
   </div>
 </div>
 
 <script>
-// ========== CRYPTO HELPERS ==========
+// ===== CRYPTO =====
 async function sha256(msg){
   const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(msg));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-// ========== STORAGE ==========
-const SK = {
-  users: 'mkut_users',
-  logs:  'mkut_logs_',   // + userId
-  books: 'mkut_books_',  // + userId
-  plans: 'mkut_plans_',  // + userId
-  diary: 'mkut_diary_',  // + userId
-  rem:   'mkut_rem',
-};
-const getJ = k => { try{ return JSON.parse(localStorage.getItem(k))||null }catch(e){return null} };
-const setJ = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+// ===== STORAGE =====
+const SK={users:'mkut_users',logs:'mkut_L_',books:'mkut_B_',plans:'mkut_P_',diary:'mkut_D_',feedback:'mkut_F_',msgs:'mkut_M_',goals:'mkut_G_admin',rem:'mkut_rem'};
+const gJ=k=>{try{return JSON.parse(localStorage.getItem(k))||null}catch(e){return null}};
+const sJ=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const getUsers=()=>gJ(SK.users)||[];
+const saveUsers=u=>sJ(SK.users,u);
+const getBooks=id=>gJ(SK.books+id)||[];
+const saveBooks=(id,b)=>sJ(SK.books+id,b);
+const getLogs=id=>gJ(SK.logs+id)||[];
+const saveLogs=(id,l)=>sJ(SK.logs+id,l);
+const getPlans=id=>gJ(SK.plans+id)||[];
+const savePlans=(id,p)=>sJ(SK.plans+id,p);
+const getDiary=id=>gJ(SK.diary+id)||[];
+const saveDiary2=(id,d)=>sJ(SK.diary+id,d);
+const getFeedback=id=>gJ(SK.feedback+id)||[];
+const saveFeedback2=(id,f)=>sJ(SK.feedback+id,f);
+const getMsgs=id=>gJ(SK.msgs+id)||[];
+const saveMsgs=(id,m)=>sJ(SK.msgs+id,m);
+const getGoals=()=>gJ(SK.goals)||[];
+const saveGoals=g=>sJ(SK.goals,g);
 
-function getUsers(){ return getJ(SK.users)||[] }
-function saveUsers(u){ setJ(SK.users,u) }
-function getBooks(uid){ return getJ(SK.books+uid)||[] }
-function saveBooks(uid,b){ setJ(SK.books+uid,b) }
-function getLogs(uid){ return getJ(SK.logs+uid)||[] }
-function saveLogs(uid,l){ setJ(SK.logs+uid,l) }
-function getPlans(uid){ return getJ(SK.plans+uid)||[] }
-function savePlans(uid,p){ setJ(SK.plans+uid,p) }
-function getDiary(uid){ return getJ(SK.diary+uid)||[] }
-function saveDiary2(uid,d){ setJ(SK.diary+uid,d) }
-
-// ========== INIT ADMIN ==========
+// ===== INIT ADMIN =====
 async function initAdmin(){
-  let users = getUsers();
+  let users=getUsers();
   if(!users.find(u=>u.role==='admin')){
-    const passH = await sha256('admin123');
-    const ansH  = await sha256('kutubxona');
-    users.push({
-      id:'admin_001', name:'Administrator', passHash:passH,
-      question:'Tizim nomi?', answerHash:ansH, role:'admin',
-      created: new Date().toISOString()
-    });
+    const pH=await sha256('admin123');
+    const aH=await sha256('kutubxona');
+    users.push({id:'admin_001',name:'Administrator',passHash:pH,question:"Tizim nomi?",answerHash:aH,role:'admin',created:new Date().toISOString()});
     saveUsers(users);
   }
 }
 
-// ========== STATE ==========
-let curUser=null, curIP=null, isFresh=false, editBookId=null, editUserId=null;
+// ===== STATE =====
+let curUser=null,curIP=null,isFresh=false,editBookId=null;
+let charts={};
 
-// ========== HELPERS ==========
+// ===== HELPERS =====
 const $=id=>document.getElementById(id);
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function fmtDate(iso){return new Date(iso).toLocaleDateString('uz-UZ',{day:'2-digit',month:'short',year:'numeric'})}
-function fmtTime(iso){return new Date(iso).toLocaleTimeString('uz-UZ',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
-function isToday(iso){const d=new Date(iso),n=new Date();return d.toDateString()===n.toDateString()}
-function getBrowser(ua){if(ua.includes('Edg'))return'Edge';if(ua.includes('Chrome'))return'Chrome';if(ua.includes('Firefox'))return'Firefox';if(ua.includes('Safari'))return'Safari';return'Boshqa'}
-function getOS(ua){if(ua.includes('Windows'))return'Windows';if(ua.includes('Mac'))return'macOS';if(ua.includes('Android'))return'Android';if(ua.includes('iPhone')||ua.includes('iPad'))return'iOS';if(ua.includes('Linux'))return'Linux';return''}
-function closeModal(id){$(id).classList.remove('open')}
-function stars(n){return n?'⭐'.repeat(+n):''}
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmtDate=iso=>new Date(iso).toLocaleDateString('uz-UZ',{day:'2-digit',month:'short',year:'numeric'});
+const fmtTime=iso=>new Date(iso).toLocaleTimeString('uz-UZ',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+const isToday=iso=>new Date(iso).toDateString()===new Date().toDateString();
+const getBrowser=ua=>ua.includes('Edg')?'Edge':ua.includes('Chrome')?'Chrome':ua.includes('Firefox')?'Firefox':ua.includes('Safari')?'Safari':'Boshqa';
+const getOS=ua=>ua.includes('Windows')?'Windows':ua.includes('Mac')?'macOS':ua.includes('Android')?'Android':(ua.includes('iPhone')||ua.includes('iPad'))?'iOS':ua.includes('Linux')?'Linux':'';
+const closeM=id=>$(id).classList.remove('open');
+const stars=n=>n?'⭐'.repeat(+n):'';
 
 async function fetchIP(){
-  try{const r=await fetch('https://api.ipify.org?format=json');const d=await r.json();curIP=d.ip||'?';}
-  catch(e){curIP='?';}
+  try{const r=await fetch('https://api.ipify.org?format=json');const d=await r.json();curIP=d.ip||'?';}catch(e){curIP='?';}
   if($('curIPEl'))$('curIPEl').textContent=curIP;
 }
 async function getLocation(){
   return new Promise(res=>{
-    if(!navigator.geolocation){res('GPS yo\'q');return}
+    if(!navigator.geolocation){res('GPS mavjud emas');return}
     navigator.geolocation.getCurrentPosition(async p=>{
       try{
         const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${p.coords.latitude}&lon=${p.coords.longitude}&format=json`);
@@ -507,287 +543,314 @@ async function getLocation(){
         const city=d.address?.city||d.address?.town||d.address?.village||'';
         const country=d.address?.country||'';
         res([city,country].filter(Boolean).join(', ')||'Aniqlanmadi');
-      }catch(e){res(`${p.coords.latitude.toFixed(3)},${p.coords.longitude.toFixed(3)}`)}
+      }catch(e){res(`${p.coords.latitude.toFixed(3)}, ${p.coords.longitude.toFixed(3)}`);}
     },()=>res('Ruxsat berilmadi'),{timeout:6000});
   });
 }
 
-// ========== LOGIN TAB ==========
-function showLoginTab(name,el){
+// ===== LOGIN TABS =====
+function showTab(name,el){
   document.querySelectorAll('.tab-l').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  $('tabLogin').style.display=name==='login'?'block':'none';
-  $('tabRegister').style.display=name==='register'?'block':'none';
-  $('tabForgot').style.display=name==='forgot'?'block':'none';
-  $('tabAdmin').style.display=name==='admin'?'block':'none';
-  $('fgQuestionBox').style.display='none';
-  $('fgErr').innerHTML='';$('loginErr').innerHTML='';
-  if($('regErr'))$('regErr').innerHTML='';
-  if($('adminErr'))$('adminErr').innerHTML='';
+  if(el)el.classList.add('active');
+  ['pLogin','pRegister','pForgot','pAdmin'].forEach(id=>$(id).style.display='none');
+  const map={login:'pLogin',register:'pRegister',forgot:'pForgot',admin:'pAdmin'};
+  $(map[name]).style.display='block';
+  ['lErr','rErr','fErr','fErr2','aErr'].forEach(id=>{if($(id))$(id).textContent='';});
+}
+
+// ===== KIRISH =====
+async function doLogin(autoName,autoPass){
+  const name=(autoName||$('lName').value).trim();
+  const pass=autoPass||$('lPass').value;
+  if(!name||!pass){$('lErr').textContent='Ism va parolni kiriting';return}
+  const users=getUsers();
+  const passH=await sha256(pass);
+  // Foydalanuvchi (admin emas) kirishi - faqat ism va parol
+  const user=users.find(u=>u.role!=='admin'&&u.name===name&&u.passHash===passH);
+  if(!user){
+    $('lErr').textContent="Ism yoki parol noto'g'ri";
+    $('loginCard').classList.add('shake');
+    setTimeout(()=>$('loginCard').classList.remove('shake'),400);
+    $('lPass').value='';
+    localStorage.removeItem(SK.rem);
+    return;
+  }
+  if(!autoName&&$('remMe').checked)sJ(SK.rem,{name,pass});
+  else if(!autoName)localStorage.removeItem(SK.rem);
+  curUser=user;isFresh=true;
+  await recordLogin();
+  enterApp();
 }
 
 async function doAdminLogin(){
-  const pass=$('adminPass').value;
-  if(!pass){$('adminErr').textContent='Parolni kiriting';return}
+  const pass=$('aPass').value;
+  if(!pass){$('aErr').textContent='Parolni kiriting';return}
   const users=getUsers();
   const passH=await sha256(pass);
   const admin=users.find(u=>u.role==='admin'&&u.passHash===passH);
   if(!admin){
-    $('adminErr').textContent='Parol noto\u02BFg\u02BFri';
+    $('aErr').textContent="Parol noto'g'ri";
     $('loginCard').classList.add('shake');
     setTimeout(()=>$('loginCard').classList.remove('shake'),400);
-    $('adminPass').value='';
+    $('aPass').value='';
     return;
   }
-  $('adminErr').textContent='';
-  curUser=admin; isFresh=true;
+  curUser=admin;isFresh=true;
+  sJ(SK.rem+'_admin',{pass});
+  await recordLogin();
+  enterApp();
+}
+
+async function recordLogin(){
   if(!curIP)await fetchIP();
   const loc=await getLocation();
   const ua=navigator.userAgent;
   const entry={id:Date.now(),time:new Date().toISOString(),ip:curIP||'?',browser:getBrowser(ua),os:getOS(ua),location:loc};
-  const logs=getLogs(admin.id); logs.unshift(entry); saveLogs(admin.id,logs);
-  enterApp();
-}
-
-async function doRegister(){
-  const name=$('regName').value.trim();
-  const pass=$('regPass').value;
-  const pass2=$('regPass2').value;
-  const question=$('regQuestion').value;
-  const answer=$('regAnswer').value.trim();
-  const err=$('regErr');
-  if(!name||!pass||!pass2||!answer){err.textContent="Barcha maydonlarni to'ldiring";return}
-  if(pass.length<4){err.textContent="Parol kamida 4 ta belgi bo'lsin";return}
-  if(pass!==pass2){err.textContent="Parollar mos kelmadi";return}
-  if(!answer){err.textContent="Maxfiy savol javobini kiriting";return}
-  const users=getUsers();
-  if(users.find(u=>u.name.toLowerCase()===name.toLowerCase())){err.textContent="Bu ism allaqachon ro'yxatda bor";return}
-  const passH=await sha256(pass);
-  const ansH=await sha256(answer.toLowerCase().trim());
-  const newUser={id:'u_'+Date.now(),name,passHash:passH,question,answerHash:ansH,role:'user',created:new Date().toISOString()};
-  users.push(newUser);
-  saveUsers(users);
-  err.style.color='#16a34a';
-  err.textContent="✅ Muvaffaqiyatli ro\'yxatdan o\'tdingiz! Kirishingiz mumkin.";
-  setTimeout(()=>{
-    showLoginTab('login',document.querySelectorAll('.tab-l')[0]);
-    $('loginName').value=name;
-    err.style.color='#dc2626';
-  },1500);
-}
-
-// ========== LOGIN ==========
-async function doLogin(autoName, autoPass){
-  const name=(autoName||$('loginName').value).trim();
-  const pass= autoPass||$('loginPass').value;
-  if(!name||!pass){$('loginErr').textContent="Ism va parolni kiriting";return}
-  const users=getUsers();
-  const passH=await sha256(pass);
-  const user=users.find(u=>u.name.toLowerCase()===name.toLowerCase()&&u.passHash===passH);
-  if(!user){
-    $('loginErr').textContent='Ism yoki parol noto\'g\'ri';
-    $('loginCard').classList.add('shake');
-    setTimeout(()=>$('loginCard').classList.remove('shake'),400);
-    $('loginPass').value='';
-    localStorage.removeItem(SK.rem);
-    return;
-  }
-  $('loginErr').textContent='';
-  if(!autoName&&$('remMe').checked) setJ(SK.rem,{name,pass});
-  else if(!autoName) localStorage.removeItem(SK.rem);
-  curUser=user; isFresh=true;
-  if(!curIP)await fetchIP();
-  const loc=await getLocation();
-  const ua=navigator.userAgent;
-  const entry={id:Date.now(),time:new Date().toISOString(),ip:curIP||'?',browser:getBrowser(ua),os:getOS(ua),location:loc};
-  const logs=getLogs(user.id); logs.unshift(entry); if(logs.length>200)logs.pop(); saveLogs(user.id,logs);
-  enterApp();
+  const logs=getLogs(curUser.id);logs.unshift(entry);if(logs.length>500)logs.pop();saveLogs(curUser.id,logs);
 }
 
 function enterApp(){
   $('loginPage').style.display='none';
+  document.querySelectorAll('.af').forEach(el=>el.style.display='none');
   $('appPage').style.display='flex';
-  $('topbarUser').textContent=curUser.name+(curUser.role==='admin'?' (Admin)':'');
-  $('adminTab').style.display=curUser.role==='admin'?'flex':'none';
+  $('tbUser').textContent=curUser.name+(curUser.role==='admin'?' 👑':'');
+  buildNavTabs();
+  checkMsgDot();
   checkNotifications();
-  renderAll();
+  switchToFirst();
 }
 
-// AUTO LOGIN
-(async function(){
-  await initAdmin();
-  const rem=getJ(SK.rem);
-  if(rem?.name&&rem?.pass) await doLogin(rem.name,rem.pass);
-})();
+// ===== REGISTER =====
+async function doRegister(){
+  const name=$('rName').value.trim();
+  const pass=$('rPass').value;
+  const pass2=$('rPass2').value;
+  const q=$('rQ').value;
+  const ans=$('rA').value.trim();
+  const err=$('rErr');
+  if(!name||!pass||!pass2||!ans){err.textContent='Barcha maydonlarni to\'ldiring';return}
+  if(pass.length<4){err.textContent='Parol kamida 4 ta belgi bo\'lsin';return}
+  if(pass!==pass2){err.textContent='Parollar mos kelmadi';return}
+  const users=getUsers();
+  if(users.find(u=>u.name===name)){err.textContent='Bu ism allaqachon ro\'yxatda bor';return}
+  const passH=await sha256(pass);
+  const ansH=await sha256(ans); // EXACT match - case sensitive
+  users.push({id:'u_'+Date.now(),name,passHash:passH,question:q,answerHash:ansH,role:'user',created:new Date().toISOString()});
+  saveUsers(users);
+  err.style.color='#16a34a';
+  err.textContent='Muvaffaqiyatli ro\'yxatdan o\'tdingiz! Kiring.';
+  setTimeout(()=>{showTab('login',document.querySelector('.tab-l'));$('lName').value=name;err.style.color='#dc2626';},1500);
+}
 
+// ===== FORGOT =====
+async function forgotStep1(){
+  const name=$('fName').value.trim(); // EXACT - case sensitive
+  const users=getUsers();
+  const user=users.find(u=>u.name===name&&u.role!=='admin');
+  if(!user){$('fErr').textContent='Ism topilmadi. Aynan ro\'yxatdagidek yozing (katta-kichik harflarga e\'tibor bering)';return}
+  $('fQLabel').textContent=user.question;
+  $('fStep1').style.display='none';
+  $('fStep2').style.display='block';
+  $('fErr').textContent='';
+}
+
+async function forgotStep2(){
+  const name=$('fName').value.trim();
+  const ans=$('fAns').value.trim(); // EXACT case sensitive
+  const newPass=$('fNew').value;
+  if(!ans||!newPass){$('fErr2').textContent='Barcha maydonlarni to\'ldiring';return}
+  if(newPass.length<4){$('fErr2').textContent='Parol kamida 4 ta belgi';return}
+  const users=getUsers();
+  const idx=users.findIndex(u=>u.name===name);
+  if(idx<0){$('fErr2').textContent='Xatolik yuz berdi';return}
+  const ansH=await sha256(ans); // EXACT case sensitive
+  if(ansH!==users[idx].answerHash){
+    $('fErr2').textContent='Javob noto\'g\'ri. Aynan yozganingiz bilan bir xil kiriting';
+    return;
+  }
+  users[idx].passHash=await sha256(newPass);
+  saveUsers(users);
+  const rem=gJ(SK.rem);
+  if(rem?.name===name)sJ(SK.rem,{name,pass:newPass});
+  $('fErr2').style.color='#16a34a';
+  $('fErr2').textContent='Parol yangilandi!';
+  setTimeout(()=>{
+    showTab('login',document.querySelector('.tab-l'));
+    $('lName').value=name;
+    $('fStep1').style.display='block';
+    $('fStep2').style.display='none';
+    $('fErr2').style.color='#dc2626';
+  },1500);
+}
+
+// ===== LOGOUT =====
 function doLogout(){
-  curUser=null; isFresh=false;
+  curUser=null;isFresh=false;
   $('appPage').style.display='none';
   $('loginPage').style.display='flex';
-  $('loginPass').value='';$('loginName').value='';
-  switchTab('books',document.querySelector('.ntab'));
+  document.querySelectorAll('.af').forEach(el=>el.style.display='');
+  $('lPass').value='';$('lName').value='';
 }
 
-// ========== FORGOT PASSWORD ==========
-let fgStep=1;
-async function doForgot(){
-  if(fgStep===1){
-    const name=$('fgName').value.trim();
-    if(!name){$('fgErr').textContent="Ismni kiriting";return}
-    const user=getUsers().find(u=>u.name.toLowerCase()===name.toLowerCase());
-    if(!user){$('fgErr').textContent="Bunday foydalanuvchi topilmadi";return}
-    $('fgQuestionLabel').textContent=user.question;
-    $('fgQuestionBox').style.display='block';
-    $('fgErr').textContent='';
-    fgStep=2;
-  } else {
-    const name=$('fgName').value.trim();
-    const answer=$('fgAnswer').value.trim();
-    const newPass=$('fgNewPass').value;
-    if(!answer||!newPass){$('fgErr').textContent='Barcha maydonlarni to\'ldiring';return}
-    if(newPass.length<4){$('fgErr').textContent='Parol kamida 4 ta belgi';return}
+// ===== AUTO LOGIN =====
+(async function(){
+  await initAdmin();
+  // Admin auto login
+  const aRem=gJ(SK.rem+'_admin');
+  if(aRem?.pass){
     const users=getUsers();
-    const idx=users.findIndex(u=>u.name.toLowerCase()===name.toLowerCase());
-    const user=users[idx];
-    const ansH=await sha256(answer.toLowerCase().trim());
-    if(ansH!==user.answerHash){$('fgErr').textContent='Javob noto\'g\'ri';return}
-    users[idx].passHash=await sha256(newPass);
-    saveUsers(users);
-    // update remembered
-    const rem=getJ(SK.rem);
-    if(rem?.name===name) setJ(SK.rem,{name,pass:newPass});
-    $('fgErr').style.color='#16a34a';
-    $('fgErr').textContent='✅ Parol muvaffaqiyatli yangilandi!';
-    fgStep=1;
-    setTimeout(()=>{showLoginTab('login',document.querySelector('.tab-l'));$('fgErr').style.color='#dc2626';fgStep=1;},1500);
+    const passH=await sha256(aRem.pass);
+    const admin=users.find(u=>u.role==='admin'&&u.passHash===passH);
+    if(admin){curUser=admin;isFresh=false;await recordLogin();enterApp();return;}
   }
+  // User auto login
+  const rem=gJ(SK.rem);
+  if(rem?.name&&rem?.pass){
+    const users=getUsers();
+    const passH=await sha256(rem.pass);
+    const user=users.find(u=>u.role!=='admin'&&u.name===rem.name&&u.passHash===passH);
+    if(user){curUser=user;isFresh=false;await recordLogin();enterApp();}
+  }
+})();
+
+// ===== NAV TABS =====
+const USER_TABS=[
+  {id:'books',label:'<i class="ti ti-books"></i> Kitoblar'},
+  {id:'plans',label:'<i class="ti ti-calendar"></i> O\'qish rejasi'},
+  {id:'diary',label:'<i class="ti ti-pencil"></i> Kundalik'},
+  {id:'feedback',label:'<i class="ti ti-message-2"></i> Murojaat'},
+  {id:'logs',label:'<i class="ti ti-history"></i> Kirish tarixi'},
+];
+const ADMIN_TABS=[
+  {id:'adminUsers',label:'<i class="ti ti-users"></i> Foydalanuvchilar'},
+  {id:'adminChart',label:'<i class="ti ti-chart-bar"></i> Diagramma'},
+  {id:'adminMsg',label:'<i class="ti ti-message-2"></i> Xabarlar'},
+  {id:'adminGoals',label:'<i class="ti ti-target"></i> Maqsadlarim'},
+  {id:'logs',label:'<i class="ti ti-history"></i> Kirish tarixi'},
+];
+
+function buildNavTabs(){
+  const tabs=curUser.role==='admin'?ADMIN_TABS:USER_TABS;
+  $('navTabs').innerHTML=tabs.map((t,i)=>`<div class="ntab${i===0?' active':''}" data-tab="${t.id}" onclick="switchTab('${t.id}',this)">${t.label}</div>`).join('');
+  // Show msg button for users
+  $('msgBtnTop').style.display=curUser.role!=='admin'?'flex':'none';
 }
 
-// ========== NOTIFICATIONS ==========
-function checkNotifications(){
-  if(!curUser)return;
-  const plans=getPlans(curUser.id);
-  const msgs=[];
-  plans.forEach(p=>{
-    if(p.done)return;
-    const today=new Date().toDateString();
-    const lastRead=p.lastRead;
-    if(lastRead&&new Date(lastRead).toDateString()!==today){
-      msgs.push(`"${p.book}" — bugun o'qimadingiz! 📚`);
-    }
-  });
-  if(msgs.length){
-    $('notifyBanner').style.display='flex';
-    $('notifyText').textContent=msgs[0];
-  } else {
-    $('notifyBanner').style.display='none';
-  }
+function switchToFirst(){
+  const first=curUser.role==='admin'?'adminUsers':'books';
+  switchTab(first,document.querySelector('.ntab'));
 }
 
-// ========== SWITCH TAB ==========
 function switchTab(name,el){
   document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
   if(el)el.classList.add('active');
-  ['Books','Plans','Diary','Logs','Admin'].forEach(t=>$('tab'+t).style.display='none');
-  $('tab'+name.charAt(0).toUpperCase()+name.slice(1)).style.display='block';
-  if(name==='logs')renderLogs();
-  if(name==='admin')renderAdmin();
+  const all=['Books','Plans','Diary','Feedback','Logs','AdminUsers','AdminChart','AdminMsg','AdminGoals'];
+  all.forEach(t=>$('tab'+t).style.display='none');
+  const map={books:'Books',plans:'Plans',diary:'Diary',feedback:'Feedback',logs:'Logs',adminUsers:'AdminUsers',adminChart:'AdminChart',adminMsg:'AdminMsg',adminGoals:'AdminGoals'};
+  const tab=map[name];
+  if(tab)$('tab'+tab).style.display='block';
+  // Render
+  if(name==='books'){renderBookStats();renderBooks();}
   if(name==='plans')renderPlans();
   if(name==='diary')renderDiary();
+  if(name==='feedback')renderFeedback();
+  if(name==='logs')renderLogs();
+  if(name==='adminUsers')renderAdminUsers();
+  if(name==='adminChart')renderCharts();
+  if(name==='adminMsg')renderAdminMsgs();
+  if(name==='adminGoals')renderGoals();
 }
 
-function renderAll(){
-  renderBookStats();renderBooks();
+// ===== NOTIFICATIONS =====
+function checkNotifications(){
+  if(!curUser||curUser.role==='admin')return;
+  const plans=getPlans(curUser.id);
+  const msgs=getMsgs(curUser.id).filter(m=>!m.readByUser);
+  const late=plans.filter(p=>!p.done&&p.lastRead&&!isToday(p.lastRead));
+  let txt='';
+  if(msgs.length)txt=`Sizga ${msgs.length} ta yangi xabar bor! 📩`;
+  else if(late.length)txt=`"${late[0].book}" — bugun o'qimadingiz! 📚`;
+  if(txt){$('notifyBanner').style.display='flex';$('notifyText').textContent=txt;}
+  else $('notifyBanner').style.display='none';
 }
 
-// ========== BOOKS ==========
+function checkMsgDot(){
+  if(!curUser||curUser.role==='admin')return;
+  const unread=getMsgs(curUser.id).filter(m=>!m.readByUser).length;
+  $('msgDot').style.display=unread>0?'block':'none';
+}
+
+// ===== BOOKS =====
 function renderBookStats(){
-  const books=getBooks(curUser.id);
-  const done=books.filter(b=>b.status==='done').length;
-  const reading=books.filter(b=>b.status==='reading').length;
-  const plan=books.filter(b=>b.status==='plan').length;
+  const b=getBooks(curUser.id);
   $('bookStats').innerHTML=`
-    <div class="stat"><div class="stat-label">Jami kitob</div><div class="stat-val">${books.length}</div></div>
-    <div class="stat"><div class="stat-label">O'qildi</div><div class="stat-val" style="color:#16a34a">${done}</div></div>
-    <div class="stat"><div class="stat-label">O'qilmoqda</div><div class="stat-val" style="color:#1d4ed8">${reading}</div></div>
-    <div class="stat"><div class="stat-label">Rejalashtirilgan</div><div class="stat-val" style="color:#a16207">${plan}</div></div>`;
+    <div class="stat"><div class="stat-label">Jami</div><div class="stat-val">${b.length}</div></div>
+    <div class="stat"><div class="stat-label">O'qildi</div><div class="stat-val" style="color:#16a34a">${b.filter(x=>x.status==='done').length}</div></div>
+    <div class="stat"><div class="stat-label">O'qilmoqda</div><div class="stat-val" style="color:#1d4ed8">${b.filter(x=>x.status==='reading').length}</div></div>
+    <div class="stat"><div class="stat-label">Rejalangan</div><div class="stat-val" style="color:#a16207">${b.filter(x=>x.status==='plan').length}</div></div>`;
 }
 
 function renderBooks(){
-  const q=($('searchInput').value||'').toLowerCase();
+  const q=($('searchInput')?.value||'').toLowerCase();
   let books=getBooks(curUser.id);
   if(q)books=books.filter(b=>(b.name+b.author+b.publisher+b.desc).toLowerCase().includes(q));
-  const statusLabel={reading:'📖 O\'qiyapman',done:'✅ O\'qib bo\'ldim',plan:'📌 O\'qimoqchiman'};
-  const statusCls={reading:'s-reading',done:'s-done',plan:'s-plan'};
+  const sLabel={reading:'📖 O\'qiyapman',done:'✅ O\'qib bo\'ldim',plan:'📌 O\'qimoqchiman'};
+  const sCls={reading:'s-reading',done:'s-done',plan:'s-plan'};
   if(!books.length){$('booksGrid').innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="ti ti-books"></i>${q?'Topilmadi':'Hali kitob qo\'shilmagan'}</div>`;return}
   $('booksGrid').innerHTML=books.map(b=>`
     <div class="book-card">
-      <div class="book-top">
-        <div class="book-title">${esc(b.name)}</div>
-        <div class="book-acts">
-          <button class="bk-btn" onclick="openBookModal('${b.id}')"><i class="ti ti-edit"></i></button>
-          <button class="bk-btn del" onclick="delBook('${b.id}')"><i class="ti ti-trash"></i></button>
-        </div>
+      <div class="book-top"><div class="book-title">${esc(b.name)}</div>
+        <div class="book-acts"><button class="bk-btn" onclick="openBookModal('${b.id}')"><i class="ti ti-edit"></i></button><button class="bk-btn del" onclick="delBook('${b.id}')"><i class="ti ti-trash"></i></button></div>
       </div>
-      <div class="book-meta">
-        <span><i class="ti ti-user"></i>${esc(b.author||'—')}</span>
-        ${b.pages?`<span><i class="ti ti-file-text"></i>${b.pages} bet</span>`:''}
-        ${b.year?`<span><i class="ti ti-calendar"></i>${b.year}</span>`:''}
-      </div>
-      <span class="status-badge ${statusCls[b.status]||'s-plan'}">${statusLabel[b.status]||'📌'}</span>
+      <div class="book-meta"><span><i class="ti ti-user"></i>${esc(b.author||'—')}</span>${b.pages?`<span><i class="ti ti-file-text"></i>${b.pages} bet</span>`:''}</div>
+      <span class="status-badge ${sCls[b.status]||'s-plan'}">${sLabel[b.status]||'📌'}</span>
       ${b.rating?`<div class="stars">${stars(b.rating)}</div>`:''}
-      ${b.desc?`<div class="book-desc">${esc(b.desc)}</div>`:''}
+      ${b.desc?`<div style="font-size:12px;color:#6b7280;margin-top:6px;border-top:1px solid #f3f4f6;padding-top:6px">${esc(b.desc)}</div>`:''}
     </div>`).join('');
 }
 
 function openBookModal(id){
-  editBookId=id||null;
-  $('bookErr').innerHTML='';
+  editBookId=id||null;$('bookErr').innerHTML='';
   if(id){
-    const b=getBooks(curUser.id).find(x=>x.id==id);
-    if(!b)return;
+    const b=getBooks(curUser.id).find(x=>x.id==id);if(!b)return;
     $('bookModalTitle').innerHTML='<i class="ti ti-edit"></i> Kitobni tahrirlash';
-    $('bName').value=b.name||'';$('bAuthor').value=b.author||'';
-    $('bPages').value=b.pages||'';$('bYear').value=b.year||'';
-    $('bPublisher').value=b.publisher||'';$('bStatus').value=b.status||'plan';
+    $('bName').value=b.name||'';$('bAuthor').value=b.author||'';$('bPages').value=b.pages||'';
+    $('bYear').value=b.year||'';$('bPublisher').value=b.publisher||'';$('bStatus').value=b.status||'plan';
     $('bRating').value=b.rating||'';$('bDesc').value=b.desc||'';
-  } else {
+  }else{
     $('bookModalTitle').innerHTML='<i class="ti ti-book"></i> Kitob qo\'shish';
-    ['bName','bAuthor','bPages','bYear','bPublisher','bDesc'].forEach(id=>$(id).value='');
+    ['bName','bAuthor','bPages','bYear','bPublisher','bDesc'].forEach(i=>$(i).value='');
     $('bStatus').value='plan';$('bRating').value='';
   }
   $('bookModal').classList.add('open');
 }
-function closeBookModal(){closeModal('bookModal')}
 function saveBook(){
   const name=$('bName').value.trim(),author=$('bAuthor').value.trim();
   if(!name||!author){$('bookErr').textContent='Kitob nomi va muallif majburiy';return}
   const books=getBooks(curUser.id);
-  const entry={name,author,pages:$('bPages').value,year:$('bYear').value,publisher:$('bPublisher').value,status:$('bStatus').value,rating:$('bRating').value,desc:$('bDesc').value};
-  if(editBookId){const i=books.findIndex(b=>b.id==editBookId);if(i>-1)books[i]={...books[i],...entry};}
-  else{books.unshift({id:Date.now(),...entry,added:new Date().toISOString()});}
-  saveBooks(curUser.id,books);closeBookModal();renderBookStats();renderBooks();
+  const e={name,author,pages:$('bPages').value,year:$('bYear').value,publisher:$('bPublisher').value,status:$('bStatus').value,rating:$('bRating').value,desc:$('bDesc').value};
+  if(editBookId){const i=books.findIndex(b=>b.id==editBookId);if(i>-1)books[i]={...books[i],...e};}
+  else books.unshift({id:Date.now(),...e,added:new Date().toISOString()});
+  saveBooks(curUser.id,books);closeM('bookModal');renderBookStats();renderBooks();
 }
 function delBook(id){if(!confirm('O\'chirasizmi?'))return;saveBooks(curUser.id,getBooks(curUser.id).filter(b=>b.id!=id));renderBookStats();renderBooks();}
 
-// ========== READING PLANS ==========
+// ===== PLANS =====
 function calcPlan(){
-  const total=+$('pTotal').value, daily=+$('pDaily').value;
+  const total=+$('pTotal').value,daily=+$('pDaily').value;
   if(!total||!daily){$('planCalc').style.display='none';return}
   const days=Math.ceil(total/daily);
   const start=new Date($('pStart').value||new Date());
   const end=new Date(start);end.setDate(end.getDate()+days-1);
   $('planCalc').style.display='block';
-  $('planCalcText').innerHTML=`📅 <strong>${days} kun</strong> kerak &nbsp;·&nbsp; Tugash: <strong>${end.toLocaleDateString('uz-UZ')}</strong>`;
+  $('planCalc').innerHTML=`📅 <strong>${days} kun</strong> kerak &nbsp;·&nbsp; Tugash: <strong>${end.toLocaleDateString('uz-UZ')}</strong>`;
 }
-
 function openPlanModal(){
   $('pBook').value='';$('pTotal').value='';$('pDaily').value='';
   $('pStart').value=new Date().toISOString().split('T')[0];
   $('planCalc').style.display='none';$('planErr').textContent='';
   $('planModal').classList.add('open');
 }
-function closePlanModal(){closeModal('planModal')}
 function savePlan(){
   const book=$('pBook').value.trim(),total=+$('pTotal').value,daily=+$('pDaily').value;
   if(!book||!total||!daily){$('planErr').textContent='Barcha maydonlarni to\'ldiring';return}
@@ -795,24 +858,21 @@ function savePlan(){
   const start=new Date($('pStart').value||new Date());
   const end=new Date(start);end.setDate(end.getDate()+days-1);
   const plans=getPlans(curUser.id);
-  plans.unshift({id:Date.now(),book,total,daily,days,start:start.toISOString(),end:end.toISOString(),read:0,lastRead:null,done:false,created:new Date().toISOString()});
-  savePlans(curUser.id,plans);closePlanModal();renderPlans();
+  plans.unshift({id:Date.now(),book,total,daily,days,start:start.toISOString(),end:end.toISOString(),read:0,lastRead:null,done:false});
+  savePlans(curUser.id,plans);closeM('planModal');renderPlans();
 }
-
 function renderPlans(){
   const plans=getPlans(curUser.id);
   if(!plans.length){$('plansList').innerHTML=`<div class="empty"><i class="ti ti-calendar"></i>Hali o'qish rejasi yo'q</div>`;return}
   $('plansList').innerHTML=plans.map(p=>{
-    const pct=Math.min(100,Math.round(p.read/p.total*100));
-    const today=new Date(),end=new Date(p.end);
-    const daysLeft=Math.ceil((end-today)/(1000*60*60*24));
-    const late=!p.done&&daysLeft<0;
+    const pct=Math.min(100,Math.round((p.read/p.total)*100));
+    const daysLeft=Math.ceil((new Date(p.end)-new Date())/(1000*60*60*24));
     return`<div class="plan-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div class="plan-title">📚 ${esc(p.book)}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:14px;font-weight:600">📚 ${esc(p.book)}</div>
         <div style="display:flex;gap:4px">
-          <button class="bk-btn" onclick="markRead('${p.id}')"><i class="ti ti-check"></i></button>
-          <button class="bk-btn del" onclick="delPlan('${p.id}')"><i class="ti ti-trash"></i></button>
+          <button class="btn-sm" onclick="markRead('${p.id}')"><i class="ti ti-check"></i> O'qidim</button>
+          <button class="btn-danger" onclick="delPlan('${p.id}')"><i class="ti ti-trash"></i></button>
         </div>
       </div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
@@ -822,13 +882,12 @@ function renderPlans(){
         <span><i class="ti ti-calendar"></i>${fmtDate(p.start)} → ${fmtDate(p.end)}</span>
         <span><strong>${pct}%</strong></span>
       </div>
-      ${p.done?`<div class="plan-done"><i class="ti ti-circle-check"></i> Muvaffaqiyatli tugatildi! 🎉</div>`:''}
-      ${late&&!p.done?`<div class="plan-warn"><i class="ti ti-alert-circle"></i> Muddat o'tib ketdi! Davom etishni unutmang.</div>`:''}
-      ${!p.done&&!late&&daysLeft<=3?`<div class="plan-warn"><i class="ti ti-clock"></i> ${daysLeft} kun qoldi!</div>`:''}
+      ${p.done?'<div class="plan-ok"><i class="ti ti-circle-check"></i> Tugatildi! 🎉</div>':''}
+      ${!p.done&&daysLeft<0?'<div class="plan-warn"><i class="ti ti-alert-circle"></i> Muddat o\'tib ketdi!</div>':''}
+      ${!p.done&&daysLeft>=0&&daysLeft<=3?`<div class="plan-warn"><i class="ti ti-clock"></i> ${daysLeft} kun qoldi!</div>`:''}
     </div>`;
   }).join('');
 }
-
 function markRead(id){
   const plans=getPlans(curUser.id);
   const i=plans.findIndex(p=>p.id==id);if(i<0)return;
@@ -839,135 +898,273 @@ function markRead(id){
 }
 function delPlan(id){if(!confirm('O\'chirasizmi?'))return;savePlans(curUser.id,getPlans(curUser.id).filter(p=>p.id!=id));renderPlans();}
 
-// ========== DIARY ==========
-function openDiaryModal(){
-  $('dDate').value=new Date().toISOString().split('T')[0];
-  $('dText').value='';$('dMood').value='😊';
-  $('diaryModal').classList.add('open');
-}
-function closeDiaryModal(){closeModal('diaryModal')}
+// ===== DIARY =====
+function openDiaryModal(){$('dDate').value=new Date().toISOString().split('T')[0];$('dText').value='';$('dMood').value='😊';$('diaryModal').classList.add('open');}
 function saveDiary(){
-  const text=$('dText').value.trim();
-  if(!text){alert('Biror narsa yozing');return}
+  const text=$('dText').value.trim();if(!text){alert('Biror narsa yozing');return}
   const diary=getDiary(curUser.id);
-  diary.unshift({id:Date.now(),date:$('dDate').value,text,mood:$('dMood').value,created:new Date().toISOString()});
-  saveDiary2(curUser.id,diary);closeDiaryModal();renderDiary();
+  diary.unshift({id:Date.now(),date:$('dDate').value,text,mood:$('dMood').value});
+  saveDiary2(curUser.id,diary);closeM('diaryModal');renderDiary();
 }
 function renderDiary(){
   const diary=getDiary(curUser.id);
   if(!diary.length){$('diaryList').innerHTML=`<div class="empty"><i class="ti ti-pencil"></i>Hali yozuv yo'q</div>`;return}
   $('diaryList').innerHTML=diary.map(d=>`
-    <div class="plan-card">
+    <div class="diary-card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <div style="font-size:13px;font-weight:600;color:#374151">${d.mood} ${fmtDate(d.date)}</div>
-        <button class="bk-btn del" onclick="delDiary('${d.id}')"><i class="ti ti-trash"></i></button>
+        <div style="font-size:12px;font-weight:600">${d.mood} ${fmtDate(d.date)}</div>
+        <button class="btn-danger" onclick="delDiary('${d.id}')"><i class="ti ti-trash"></i></button>
       </div>
       <div style="font-size:13px;color:#4b5563;line-height:1.6;white-space:pre-wrap">${esc(d.text)}</div>
     </div>`).join('');
 }
 function delDiary(id){if(!confirm('O\'chirasizmi?'))return;saveDiary2(curUser.id,getDiary(curUser.id).filter(d=>d.id!=id));renderDiary();}
 
-// ========== LOGS ==========
+// ===== FEEDBACK =====
+function openFeedbackModal(){$('fbType').value='taklif';$('fbText').value='';$('feedbackModal').classList.add('open');}
+function saveFeedback(){
+  const text=$('fbText').value.trim();if(!text){alert('Xabar yozing');return}
+  const fb=getFeedback(curUser.id);
+  fb.unshift({id:Date.now(),type:$('fbType').value,text,time:new Date().toISOString(),userName:curUser.name,userId:curUser.id,reply:null,read:false});
+  saveFeedback2(curUser.id,fb);
+  closeM('feedbackModal');renderFeedback();
+}
+function renderFeedback(){
+  const fb=getFeedback(curUser.id);
+  if(!fb.length){$('feedbackList').innerHTML=`<div class="empty"><i class="ti ti-message-2"></i>Hali murojaat yuborilmagan</div>`;return}
+  const typeLabel={taklif:'💡 Taklif',muammo:'⚠️ Muammo',savol:'❓ Savol',boshqa:'📝 Boshqa'};
+  $('feedbackList').innerHTML=fb.map(f=>`
+    <div class="msg-card">
+      <div style="display:flex;justify-content:space-between">
+        <span class="msg-from">${typeLabel[f.type]||f.type}</span>
+        <span class="msg-time">${fmtDate(f.time)}</span>
+      </div>
+      <div class="msg-text">${esc(f.text)}</div>
+      ${f.reply?`<div class="msg-reply"><i class="ti ti-corner-down-right"></i> Admin javobi: ${esc(f.reply)}</div>`:'<div style="font-size:11px;color:#9ca3af;margin-top:4px">⏳ Javob kutilmoqda...</div>'}
+    </div>`).join('');
+  // Mark admin msgs as read
+  const msgs=getMsgs(curUser.id);
+  msgs.forEach(m=>m.readByUser=true);
+  saveMsgs(curUser.id,msgs);
+  $('msgDot').style.display='none';
+}
+
+// ===== LOGS =====
 function renderLogs(){
   const logs=getLogs(curUser.id);
   $('logCount').textContent=logs.length+' ta kirish';
   const today=logs.filter(l=>isToday(l.time)).length;
   $('logStats').innerHTML=`
-    <div class="stat"><div class="stat-label">Jami kirish</div><div class="stat-val">${logs.length}</div></div>
+    <div class="stat"><div class="stat-label">Jami</div><div class="stat-val">${logs.length}</div></div>
     <div class="stat"><div class="stat-label">Bugun</div><div class="stat-val">${today}</div></div>
-    <div class="stat"><div class="stat-label">Oxirgi IP</div><div class="stat-val" style="font-size:13px">${logs[0]?.ip||'—'}</div></div>
+    <div class="stat"><div class="stat-label">Oxirgi IP</div><div class="stat-val" style="font-size:12px;padding-top:4px">${logs[0]?.ip||'—'}</div></div>
     <div class="stat"><div class="stat-label">Joylashuv</div><div class="stat-val" style="font-size:11px;line-height:1.3">${logs[0]?.location||'—'}</div></div>`;
-  if(!logs.length){$('logList').innerHTML=`<div class="empty"><i class="ti ti-inbox"></i>Hali kirish tarixi yo'q</div>`;return}
+  if(!logs.length){$('logList').innerHTML=`<div class="empty"><i class="ti ti-inbox"></i>Kirish tarixi yo'q</div>`;return}
   $('logList').innerHTML=logs.map((e,i)=>`
     <div class="log-row">
-      <div class="log-num">${logs.length-i}</div>
-      <div><div class="log-time">${fmtTime(e.time)}</div><div class="log-date">${fmtDate(e.time)}</div></div>
-      <div style="font-family:monospace;font-size:12px;color:#374151">${e.ip}</div>
-      <div style="font-size:12px;color:#6b7280">${e.browser} · ${e.os}</div>
+      <div style="font-size:11px;color:#9ca3af;text-align:center">${logs.length-i}</div>
+      <div><div style="font-weight:600;font-size:13px">${fmtTime(e.time)}</div><div style="font-size:11px;color:#6b7280">${fmtDate(e.time)}</div></div>
+      <div style="font-family:monospace;font-size:12px">${e.ip}</div>
+      <div style="font-size:11px;color:#6b7280">${e.browser} · ${e.os}</div>
       <div style="font-size:12px;color:#6b7280">${e.location||'—'}</div>
       <span class="badge ${i===0&&isFresh?'badge-now':'badge-old'}">${i===0&&isFresh?'hozir':'✓'}</span>
     </div>`).join('');
 }
-function clearMyLogs(){if(!confirm('Barcha kirish tarixini o\'chirish?'))return;saveLogs(curUser.id,[]);isFresh=false;renderLogs();}
+function clearMyLogs(){if(!confirm('Tozalash?'))return;saveLogs(curUser.id,[]);isFresh=false;renderLogs();}
 function exportLogs(){
   const logs=getLogs(curUser.id);if(!logs.length)return;
-  let csv='№,Sana,Vaqt,IP,Brauzer,OS,Joylashuv\n';
+  let csv='#,Sana,Vaqt,IP,Brauzer,OS,Joylashuv\n';
   logs.forEach((e,i)=>csv+=`${logs.length-i},${fmtDate(e.time)},${fmtTime(e.time)},${e.ip},${e.browser},${e.os},"${e.location||''}"\n`);
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='kirish-tarixi.csv';a.click();
 }
 
-// ========== ADMIN ==========
-function renderAdmin(){
-  const users=getUsers();
+// ===== ADMIN USERS =====
+function renderAdminUsers(){
+  const users=getUsers().filter(u=>u.role!=='admin');
+  const today=new Date().toDateString();
+  let active=0,passive=0,fresh=0;
+  users.forEach(u=>{
+    const logs=getLogs(u.id);
+    const plans=getPlans(u.id);
+    const lastLog=logs[0];
+    const books=getBooks(u.id);
+    if(lastLog&&new Date(lastLog.time).toDateString()===today)active++;
+    else if(!lastLog)fresh++;
+    else passive++;
+  });
   $('adminStats').innerHTML=`
-    <div class="stat"><div class="stat-label">Foydalanuvchilar</div><div class="stat-val">${users.length}</div></div>
-    <div class="stat"><div class="stat-label">Jami kitoblar</div><div class="stat-val">${users.reduce((s,u)=>s+getBooks(u.id).length,0)}</div></div>
-    <div class="stat"><div class="stat-label">Jami rejalar</div><div class="stat-val">${users.reduce((s,u)=>s+getPlans(u.id).length,0)}</div></div>
-    <div class="stat"><div class="stat-label">Jami yozuvlar</div><div class="stat-val">${users.reduce((s,u)=>s+getDiary(u.id).length,0)}</div></div>`;
+    <div class="stat"><div class="stat-label">Jami foydalanuvchi</div><div class="stat-val">${users.length}</div></div>
+    <div class="stat"><div class="stat-label">Bugun faol</div><div class="stat-val" style="color:#16a34a">${active}</div></div>
+    <div class="stat"><div class="stat-label">Passiv</div><div class="stat-val" style="color:#dc2626">${passive}</div></div>
+    <div class="stat"><div class="stat-label">Yangi (hali kirmagan)</div><div class="stat-val" style="color:#a16207">${fresh}</div></div>`;
+
   $('usersTbody').innerHTML=users.map((u,i)=>{
-    const logs=getLogs(u.id);const last=logs[0];
+    const logs=getLogs(u.id);
+    const last=logs[0];
+    const books=getBooks(u.id);
+    const plans=getPlans(u.id);
+    const isPassive=last&&!isToday(last.time);
     return`<tr>
       <td>${i+1}</td>
-      <td><strong>${esc(u.name)}</strong><br><span style="font-size:11px;color:#9ca3af">${u.role==='admin'?'👑 Admin':'👤 Foydalanuvchi'}</span></td>
-      <td>${last?`${fmtDate(last.time)}<br><span style="font-size:11px;color:#9ca3af">${fmtTime(last.time)}</span>`:'—'}</td>
-      <td style="font-family:monospace;font-size:12px">${last?.ip||'—'}</td>
-      <td style="font-size:12px">${last?.location||'—'}</td>
-      <td><button class="bk-btn del" onclick="delUser('${u.id}')" ${u.id==='admin_001'?'disabled title="Asosiy admin o\'chirilmaydi"':''}><i class="ti ti-trash"></i></button></td>
+      <td><strong>${esc(u.name)}</strong>${isPassive?'<br><span style="font-size:10px;color:#dc2626">😴 Passiv</span>':last?'<br><span style="font-size:10px;color:#16a34a">✅ Faol</span>':'<br><span style="font-size:10px;color:#a16207">🆕 Yangi</span>'}</td>
+      <td>${plans.filter(p=>!p.done).length} reja</td>
+      <td>${last?`${fmtDate(last.time)}<br><small style="color:#9ca3af">${fmtTime(last.time)}</small>`:'—'}</td>
+      <td style="font-family:monospace;font-size:11px">${last?.ip||'—'}</td>
+      <td style="font-size:11px">${last?.location||'—'}</td>
+      <td>${books.length} ta</td>
+      <td>
+        <button class="btn-sm" onclick="openAdminMsgModalFor('${u.id}','${u.name}')"><i class="ti ti-send"></i></button>
+        <button class="btn-danger" style="margin-left:3px" onclick="delUser('${u.id}')"><i class="ti ti-trash"></i></button>
+      </td>
     </tr>`;
   }).join('');
 }
 
-function openUserModal(id){
-  editUserId=id||null;
-  ['uName','uPass','uAnswer'].forEach(i=>$(i).value='');
-  $('uQuestion').value='Onangizning ismi?';
-  $('uRole').value='user';
-  $('userErr').textContent='';
-  $('userModalTitle').innerHTML='<i class="ti ti-user-plus"></i> Yangi foydalanuvchi';
-  $('userModal').classList.add('open');
-}
-function closeUserModal(){closeModal('userModal')}
-async function saveUser(){
-  const name=$('uName').value.trim(),pass=$('uPass').value,answer=$('uAnswer').value.trim();
-  if(!name||!pass||!answer){$('userErr').textContent='Barcha maydonlar majburiy';return}
-  if(pass.length<4){$('userErr').textContent='Parol kamida 4 ta belgi';return}
-  const users=getUsers();
-  if(users.find(u=>u.name.toLowerCase()===name.toLowerCase())){$('userErr').textContent='Bu ism allaqachon mavjud';return}
-  const passH=await sha256(pass);
-  const ansH=await sha256(answer.toLowerCase().trim());
-  users.push({id:'u_'+Date.now(),name,passHash:passH,question:$('uQuestion').value,answerHash:ansH,role:$('uRole').value,created:new Date().toISOString()});
-  saveUsers(users);closeUserModal();renderAdmin();
-}
 function delUser(id){
-  if(id==='admin_001'){alert('Asosiy adminni o\'chirib bo\'lmaydi');return}
-  if(!confirm('Foydalanuvchini o\'chirasizmi? Uning barcha ma\'lumotlari ham o\'chadi!'))return;
-  const users=getUsers().filter(u=>u.id!==id);
-  saveUsers(users);
-  ['books','plans','diary','logs'].forEach(k=>localStorage.removeItem('mkut_'+k+'_'+id));
-  renderAdmin();
+  if(!confirm('Foydalanuvchini va barcha ma\'lumotlarini o\'chirasizmi?'))return;
+  saveUsers(getUsers().filter(u=>u.id!==id));
+  ['books','plans','diary','logs','feedback','msgs'].forEach(k=>localStorage.removeItem('mkut_'+k.charAt(0).toUpperCase()+'_'+id));
+  renderAdminUsers();
 }
 
-// ========== SETTINGS ==========
-function openSettings(){$('sPass1').value='';$('sPass2').value='';$('settingsErr').textContent='';$('settingsModal').classList.add('open')}
+// ===== ADMIN CHARTS =====
+function renderCharts(){
+  const users=getUsers().filter(u=>u.role!=='admin');
+
+  // Reading progress chart
+  const labels=users.map(u=>u.name.split(' ')[0]);
+  const doneData=users.map(u=>getBooks(u.id).filter(b=>b.status==='done').length);
+  const readingData=users.map(u=>getBooks(u.id).filter(b=>b.status==='reading').length);
+  const planData=users.map(u=>getBooks(u.id).filter(b=>b.status==='plan').length);
+
+  if(charts.reading)charts.reading.destroy();
+  charts.reading=new Chart($('chartReading'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:"O'qib bo'ldi",data:doneData,backgroundColor:'#16a34a'},
+      {label:"O'qiyapti",data:readingData,backgroundColor:'#3b82f6'},
+      {label:"Rejalashtirgan",data:planData,backgroundColor:'#facc15'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}
+  });
+
+  // Status pie chart
+  const totalDone=doneData.reduce((a,b)=>a+b,0);
+  const totalReading=readingData.reduce((a,b)=>a+b,0);
+  const totalPlan=planData.reduce((a,b)=>a+b,0);
+
+  if(charts.status)charts.status.destroy();
+  charts.status=new Chart($('chartStatus'),{
+    type:'doughnut',
+    data:{
+      labels:["O'qib bo'ldi","O'qiyapti","Rejalashtirilgan"],
+      datasets:[{data:[totalDone,totalReading,totalPlan],backgroundColor:['#16a34a','#3b82f6','#facc15']}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}
+  });
+}
+
+// ===== ADMIN MESSAGES =====
+function openAdminMsgModal(){
+  const users=getUsers().filter(u=>u.role!=='admin');
+  $('amTo').innerHTML=users.map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
+  $('amText').value='';
+  $('adminMsgModal').classList.add('open');
+}
+function openAdminMsgModalFor(uid,uname){
+  openAdminMsgModal();
+  $('amTo').value=uid;
+}
+function sendAdminMsg(){
+  const toId=$('amTo').value;
+  const text=$('amText').value.trim();
+  if(!text){alert('Xabar yozing');return}
+  const msgs=getMsgs(toId);
+  msgs.unshift({id:Date.now(),text,time:new Date().toISOString(),fromAdmin:true,readByUser:false});
+  saveMsgs(toId,msgs);
+  closeM('adminMsgModal');
+  alert('Xabar yuborildi!');
+  renderAdminMsgs();
+}
+function renderAdminMsgs(){
+  const users=getUsers().filter(u=>u.role!=='admin');
+  let html='';
+  // Show all feedbacks from users
+  users.forEach(u=>{
+    const fb=getFeedback(u.id);
+    fb.forEach(f=>{
+      html+=`<div class="msg-card${!f.read?' unread':''}">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="msg-from">👤 ${esc(f.userName||u.name)}</span>
+          <span class="msg-time">${fmtDate(f.time)} ${fmtTime(f.time)}</span>
+        </div>
+        <div style="font-size:11px;color:#6b7280;margin-bottom:4px">📂 ${f.type}</div>
+        <div class="msg-text">${esc(f.text)}</div>
+        ${f.reply?`<div class="msg-reply">Javob: ${esc(f.reply)}</div>`:`<button class="btn-sm" style="margin-top:6px" onclick="replyFeedback('${u.id}','${f.id}')"><i class="ti ti-corner-down-right"></i> Javob berish</button>`}
+      </div>`;
+      f.read=true;
+    });
+    if(fb.length)saveFeedback2(u.id,fb);
+  });
+  if(!html)html=`<div class="empty"><i class="ti ti-message-2"></i>Hali xabarlar yo'q</div>`;
+  $('adminMsgList').innerHTML=html;
+}
+function replyFeedback(userId,fbId){
+  const reply=prompt('Javobingiz:');
+  if(!reply)return;
+  const fb=getFeedback(userId);
+  const i=fb.findIndex(f=>f.id==fbId);
+  if(i>-1){fb[i].reply=reply;saveFeedback2(userId,fb);}
+  // Also send as message
+  const msgs=getMsgs(userId);
+  msgs.unshift({id:Date.now(),text:'Murojaat javobingiz: '+reply,time:new Date().toISOString(),fromAdmin:true,readByUser:false});
+  saveMsgs(userId,msgs);
+  renderAdminMsgs();
+}
+
+// ===== GOALS (Admin) =====
+function openGoalModal(){$('goText').value='';$('goDate').value='';$('goalModal').classList.add('open');}
+function saveGoal(){
+  const text=$('goText').value.trim();if(!text)return;
+  const goals=getGoals();
+  goals.unshift({id:Date.now(),text,date:$('goDate').value,done:false,created:new Date().toISOString()});
+  saveGoals(goals);closeM('goalModal');renderGoals();
+}
+function renderGoals(){
+  const goals=getGoals();
+  if(!goals.length){$('goalsList').innerHTML=`<div class="empty"><i class="ti ti-target"></i>Hali maqsad qo'shilmagan</div>`;return}
+  $('goalsList').innerHTML=goals.map(g=>`
+    <div class="goal-card">
+      <input type="checkbox" class="goal-check" ${g.done?'checked':''} onchange="toggleGoal('${g.id}',this.checked)"/>
+      <div class="goal-text${g.done?' done-text':''}">${esc(g.text)}${g.date?`<br><small style="color:#9ca3af"><i class="ti ti-calendar"></i> ${fmtDate(g.date)}</small>`:''}</div>
+      <button class="btn-danger" onclick="delGoal('${g.id}')"><i class="ti ti-trash"></i></button>
+    </div>`).join('');
+}
+function toggleGoal(id,done){const goals=getGoals();const i=goals.findIndex(g=>g.id==id);if(i>-1){goals[i].done=done;saveGoals(goals);renderGoals();}}
+function delGoal(id){if(!confirm('O\'chirasizmi?'))return;saveGoals(getGoals().filter(g=>g.id!=id));renderGoals();}
+
+// ===== SETTINGS =====
+function openSettings(){$('sP1').value='';$('sP2').value='';$('sErr').textContent='';$('settingsModal').classList.add('open');}
 async function saveSettings(){
-  const p1=$('sPass1').value,p2=$('sPass2').value;
-  if(p1&&p1!==p2){$('settingsErr').textContent='Parollar mos emas';return}
-  if(p1&&p1.length<4){$('settingsErr').textContent='Kamida 4 ta belgi';return}
+  const p1=$('sP1').value,p2=$('sP2').value;
+  if(p1&&p1!==p2){$('sErr').textContent='Parollar mos emas';return}
+  if(p1&&p1.length<4){$('sErr').textContent='Kamida 4 ta belgi';return}
   if(p1){
     const users=getUsers();
     const i=users.findIndex(u=>u.id===curUser.id);
     users[i].passHash=await sha256(p1);
     saveUsers(users);
-    const rem=getJ(SK.rem);
-    if(rem)setJ(SK.rem,{name:curUser.name,pass:p1});
+    const rem=gJ(SK.rem);
+    if(rem)sJ(SK.rem,{name:curUser.name,pass:p1});
+    if(curUser.role==='admin')sJ(SK.rem+'_admin',{pass:p1});
   }
-  closeModal('settingsModal');
-  alert('✅ Saqlandi!');
+  closeM('settingsModal');
+  alert('Saqlandi!');
 }
 
-// Close modals on backdrop click
-['bookModal','planModal','diaryModal','userModal','settingsModal'].forEach(id=>{
-  $(id).addEventListener('click',function(e){if(e.target===this)closeModal(id)});
+// Close modal on backdrop
+['bookModal','planModal','diaryModal','feedbackModal','adminMsgModal','goalModal','settingsModal'].forEach(id=>{
+  $(id).addEventListener('click',function(e){if(e.target===this)closeM(id);});
 });
 
 fetchIP();
